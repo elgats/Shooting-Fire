@@ -9,7 +9,9 @@
 import SpriteKit
 import GameplayKit
 
-enum shapes {
+
+
+enum shapes:Int { //Int so that we can randomize it
     case target
     case notTarget
 }
@@ -58,8 +60,12 @@ class GameScene: SKScene {
                     directionArray.append(GKRandomSource.sharedRandom().nextBool())
             }
         }
-        }
-    
+        
+        self.run(SKAction.repeatForever(SKAction.sequence([SKAction.run {
+            self.spawnShapes()
+        }, SKAction.wait(forDuration: 5)])))
+        } // call shape, wait a bit, call shape again
+
     func setUpTracks() {
         
         for i in 0 ... 4 {
@@ -116,7 +122,7 @@ class GameScene: SKScene {
     }
         
     func shoot() {
-        //fire?.removeAllActions()
+        fire?.removeAllActions()
         moveTrack = true
         
             if let fire = self.fire {
@@ -148,10 +154,11 @@ class GameScene: SKScene {
     func createFire() {
         fire = SKSpriteNode(imageNamed: "Fire")
         
-        fire?.position = CGPoint(x:325, y: 335)
+        fire?.position = CGPoint(x: size.width * 0.5, y: size.height * 0.3)
         animateFire()
         self.addChild(fire!)
     }
+    
     
     func animateFire() {
         let flame = SKEmitterNode(fileNamed: "FireParticle")!
@@ -181,13 +188,23 @@ class GameScene: SKScene {
         let pindah = directionArray[track]
         
         shapeSprite.position.x = shapePosition.x
-        shapeSprite.position.y = pindah ? -130 : self.size.height + 130
+        shapeSprite.position.y = pindah ? 1300 : self.size.height + 130
         
         shapeSprite.physicsBody = SKPhysicsBody(edgeLoopFrom: shapeSprite.path!)
         
-        shapeSprite.physicsBody?.velocity = pindah ? CGVector(dx: 0, dy: velocityArray[track]) : CGVector(dx: 0, dy: -velocityArray[track])
+        shapeSprite.physicsBody?.velocity = pindah ? CGVector(dx: 0, dy: -velocityArray[track]) : CGVector(dx: 0, dy: -velocityArray[track])
         
         return shapeSprite
+    }
+    
+    func spawnShapes() {
+        
+        for i in 0 ... 4 { //4 = number of tracks
+            let randomShapeType = shapes(rawValue: GKRandomSource.sharedRandom().nextInt(upperBound: 2))!
+            if let newShape = createShapes(type: randomShapeType, forTrack: i) {
+                self.addChild(newShape)
+            }
+        }
     }
     
     override func update(_ currentTime: TimeInterval) {
