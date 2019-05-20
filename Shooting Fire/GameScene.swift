@@ -9,22 +9,27 @@
 import SpriteKit
 import GameplayKit
 
+enum shapes {
+    case target
+    case notTarget
+}
+
 class GameScene: SKScene {
     
-//        var tracksArray: [SKSpriteNode]? = [SKSpriteNode]() //() for initilizing tracks
+        var tracksArray: [SKSpriteNode]? = [SKSpriteNode]() //() for initilizing tracks
         var fire: SKSpriteNode?
         var currentTrack = 0
-        var musicSetting: Bool = true
         let fireSound = SKAction.playSoundFileNamed("flameloop.wav", waitForCompletion: true)
     
         //let soundtrack = SKAction.playSoundFileNamed("POL-sage-rage-short.wav", waitForCompletion: true)
         let shotSound = SKAction.playSoundFileNamed("flamethrowerwav.wav", waitForCompletion: false)
         var moveTrack = false
     
-    enum shapes {
-        case target
-        case notTarget
-    }
+        let trackVelocities = [120, 150,200] //random speed for enemies
+        var directionArray = [Bool]()
+        var velocityArray = [Int]()
+    
+
     
 //    func setUpTracks() {
 //
@@ -39,10 +44,31 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         
+        setUpTracks()
         createFire()
         sound()
+//        self.addChild(createShapes(type: .target, forTrack: 0)!)
         
+        //check the tracks first
+        
+        if let numberOfTracks = tracksArray?.count {
+            for _ in 0 ... numberOfTracks {
+                let randomNumberForVelocity = GKRandomSource.sharedRandom().nextInt(upperBound: 3) //3 because we only have 3 options for speed
+                velocityArray.append(trackVelocities[randomNumberForVelocity])
+                    directionArray.append(GKRandomSource.sharedRandom().nextBool())
+            }
         }
+        }
+    
+    func setUpTracks() {
+        
+        for i in 0 ... 4 {
+            if let track = self.childNode(withName: "\(i)") as? SKSpriteNode {
+                tracksArray?.append(track)
+            }
+        }
+        
+    }
 
     func sound() {
         let loopSound:SKAction = SKAction.repeatForever(fireSound)
@@ -57,7 +83,7 @@ class GameScene: SKScene {
         let moving = SKAction.moveBy(x: 15, y: 0, duration: 0.1)
         let repeatAction = SKAction.repeatForever(moving)
             
-            if ((fire?.position.x)!) <= UIScreen.main.bounds.maxX {
+            if ((fire?.position.x)!) <= 525 {
             fire?.run(repeatAction, withKey: "moveRight")
             }
             
@@ -79,10 +105,10 @@ class GameScene: SKScene {
             let repeatAction = SKAction.repeatForever(moving)
             fire?.run(repeatAction)
             
-            if ((fire?.position.x)!) <= UIScreen.main.bounds.minX {
+            if ((fire?.position.x)!) >= 50 {
                 fire?.run(repeatAction, withKey: "moveLeft")
             }
-                
+
             else {
                 fire?.removeAction(forKey: "moveLeft")
             }
@@ -139,15 +165,28 @@ class GameScene: SKScene {
         
         switch type {
         case .target:
-            shapeSprite.path = CGPath(roundedRect: CGRect(x: -10, y: 0, width: 30, height: 30), cornerWidth: 20, cornerHeight: 20, transform: nil)
-            shapeSprite.fillColor = UIColor.red
+            shapeSprite.path = CGPath(roundedRect: CGRect(x: -40, y: 0, width: 90, height: 90), cornerWidth: 220, cornerHeight: 220, transform: nil)
+            shapeSprite.fillColor = UIColor(red: 238/255, green: 22/255, blue: 22/255, alpha: 1)
+            
+            
+//            shapeSprite.alpha = 1
             
         case .notTarget:
-            CGPath(roundedRect: CGRect(x: -10, y: 0, width: 30, height: 30), cornerWidth: 20, cornerHeight: 20, transform: nil)
-            shapeSprite.fillColor = UIColor.green
+            shapeSprite.path = CGPath(roundedRect: CGRect(x: -40, y: 0, width: 90, height: 90), cornerWidth: 220, cornerHeight: 220, transform: nil)
+            shapeSprite.fillColor = UIColor(red: 31/255, green: 204/255, blue: 0/255, alpha: 1)
         }
         
-//        guard let shapePosition = tracksArray?[track].position else {return nil}
+        guard let shapePosition = tracksArray?[track].position else {return nil}
+        
+        let pindah = directionArray[track]
+        
+        shapeSprite.position.x = shapePosition.x
+        shapeSprite.position.y = pindah ? -130 : self.size.height + 130
+        
+        shapeSprite.physicsBody = SKPhysicsBody(edgeLoopFrom: shapeSprite.path!)
+        
+        shapeSprite.physicsBody?.velocity = pindah ? CGVector(dx: 0, dy: velocityArray[track]) : CGVector(dx: 0, dy: -velocityArray[track])
+        
         return shapeSprite
     }
     
@@ -160,14 +199,14 @@ class GameScene: SKScene {
             let location = touch.previousLocation(in: self)
             let node = self.nodes(at: location).first
             
-            if node?.name == "left" {
-                move(pindah: false)
+            if node?.name == "api" {
+                shoot()
             }
             else if node?.name == "right" {
                 move(pindah: true)
             }
-            else if node?.name == "api" {
-                shoot()
+            else if node?.name == "left" {
+                move(pindah: false)
             }
         }
     }
@@ -184,4 +223,14 @@ class GameScene: SKScene {
         fire?.removeAllActions()
     }
     
+    override func motionEnded(_ motion: UIEvent.EventSubtype,
+                     with event: UIEvent?) {
+//        if let fire = self.fire {
+//            let shooting = SKAction.moveBy(x: 0, y: 3000, duration: 2)
+//        fire.run(shooting)
+//
+//        createFire()
+        shoot()
+        }
+   // }
 }
