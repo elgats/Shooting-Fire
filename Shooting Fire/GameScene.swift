@@ -17,7 +17,7 @@ class GameScene: SKScene {
         let fireSound = SKAction.playSoundFileNamed("flameloop.wav", waitForCompletion: true)
     
         //let soundtrack = SKAction.playSoundFileNamed("POL-sage-rage-short.wav", waitForCompletion: true)
-        let shotSound = SKAction.playSoundFileNamed("bullet.wav", waitForCompletion: false)
+        let shotSound = SKAction.playSoundFileNamed("flamethrowerwav.wav", waitForCompletion: false)
         var moveTrack = false
     
 //    func setUpTracks() {
@@ -65,7 +65,7 @@ class GameScene: SKScene {
         moveTrack = true
         
             if let fire = self.fire {
-            let shooting = SKAction.moveBy(x: 0, y: 3000, duration: 0.5)
+            let shooting = SKAction.moveBy(x: 0, y: 3000, duration: 2)
 //            let repeatAction = SKAction.repeatForever(shooting)
                 fire.run(shooting, completion: {self.moveTrack = false})
                 

@@ -19,6 +19,7 @@
 		ADACE24422924FAA00016335 /* bullet.wav in Resources */ = {isa = PBXBuildFile; fileRef = ADACE24222924FAA00016335 /* bullet.wav */; };
 		ADACE24822925D2B00016335 /* flameloop.wav in Resources */ = {isa = PBXBuildFile; fileRef = ADACE24722925D2B00016335 /* flameloop.wav */; };
 		ADACE24A229270FF00016335 /* FireParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = ADACE249229270FF00016335 /* FireParticle.sks */; };
+		ADACE24C22929D1900016335 /* flamethrowerwav.wav in Resources */ = {isa = PBXBuildFile; fileRef = ADACE24B22929D1900016335 /* flamethrowerwav.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		ADACE24222924FAA00016335 /* bullet.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bullet.wav; sourceTree = "<group>"; };
 		ADACE24722925D2B00016335 /* flameloop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = flameloop.wav; sourceTree = "<group>"; };
 		ADACE249229270FF00016335 /* FireParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireParticle.sks; sourceTree = "<group>"; };
+		ADACE24B22929D1900016335 /* flamethrowerwav.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = flamethrowerwav.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 		ADACE24022924FAA00016335 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				ADACE24B22929D1900016335 /* flamethrowerwav.wav */,
 				ADACE24122924FAA00016335 /* POL-sage-rage-short.wav */,
 				ADACE24222924FAA00016335 /* bullet.wav */,
 				ADACE24722925D2B00016335 /* flameloop.wav */,
@@ -158,6 +161,7 @@
 				ADACE2322292462600016335 /* Assets.xcassets in Resources */,
 				ADACE2352292462600016335 /* LaunchScreen.storyboard in Resources */,
 				ADACE24A229270FF00016335 /* FireParticle.sks in Resources */,
+				ADACE24C22929D1900016335 /* flamethrowerwav.wav in Resources */,
 				ADACE24422924FAA00016335 /* bullet.wav in Resources */,
 				ADACE2292292462500016335 /* Actions.sks in Resources */,
 			);
