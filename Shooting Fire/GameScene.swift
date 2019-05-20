@@ -16,8 +16,10 @@ class GameScene: SKScene {
         var musicSetting: Bool = true
         let fireSound = SKAction.playSoundFileNamed("flameloop.wav", waitForCompletion: true)
     
-        let soundtrack = SKAction.playSoundFileNamed("POL-sage-rage-short.wav", waitForCompletion: true)
+        //let soundtrack = SKAction.playSoundFileNamed("POL-sage-rage-short.wav", waitForCompletion: true)
+        let shotSound = SKAction.playSoundFileNamed("bullet.wav", waitForCompletion: false)
         var moveTrack = false
+    
 //    func setUpTracks() {
 //
 //        for i in 0 ... 1 {
@@ -39,29 +41,41 @@ class GameScene: SKScene {
     func sound() {
         let loopSound:SKAction = SKAction.repeatForever(fireSound)
         self.run(loopSound)
-        let angrySound:SKAction = SKAction.repeatForever(soundtrack)
-        self.run(angrySound)
+        //let angrySound:SKAction = SKAction.repeatForever(soundtrack)
+        //self.run(angrySound)
         
     }
     
     func move (pindah: Bool) {
         if pindah {
-        let moving = SKAction.moveBy(x: 160, y: 0, duration: 0.5)
+        let moving = SKAction.moveBy(x: 15, y: 0, duration: 0.1)
         let repeatAction = SKAction.repeatForever(moving)
         fire?.run(repeatAction)
         }
         
         else {
-            let moving = SKAction.moveBy(x: -160, y: 0, duration: 0.5)
+            let moving = SKAction.moveBy(x: -5, y: 0, duration: 0.1)
             let repeatAction = SKAction.repeatForever(moving)
             fire?.run(repeatAction)
         }
+    }
         
-        func shoot (shot: Bool) {
-            
+    func shoot() {
+        //fire?.removeAllActions()
+        moveTrack = true
+        
+            if let fire = self.fire {
+            let shooting = SKAction.moveBy(x: 0, y: 3000, duration: 0.5)
+//            let repeatAction = SKAction.repeatForever(shooting)
+                fire.run(shooting, completion: {self.moveTrack = false})
+                
+            self.run(shotSound)
+                
+            createFire()
+            }
         }
         
-    }
+    
 //    func angryMusic() {
 //
 //        if musicSetting == true {
@@ -106,7 +120,9 @@ class GameScene: SKScene {
             else if node?.name == "right" {
                 move(pindah: true)
             }
-            
+            else if node?.name == "api" {
+                shoot()
+            }
         }
     }
     
@@ -116,6 +132,10 @@ class GameScene: SKScene {
             
             fire?.removeAllActions()
         }
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        fire?.removeAllActions()
     }
     
 }
