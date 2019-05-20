@@ -13,12 +13,18 @@ class GameScene: SKScene {
     
 //        var tracksArray: [SKSpriteNode]? = [SKSpriteNode]() //() for initilizing tracks
         var fire: SKSpriteNode?
+        var currentTrack = 0
         var musicSetting: Bool = true
         let fireSound = SKAction.playSoundFileNamed("flameloop.wav", waitForCompletion: true)
     
         //let soundtrack = SKAction.playSoundFileNamed("POL-sage-rage-short.wav", waitForCompletion: true)
         let shotSound = SKAction.playSoundFileNamed("flamethrowerwav.wav", waitForCompletion: false)
         var moveTrack = false
+    
+    enum shapes {
+        case target
+        case notTarget
+    }
     
 //    func setUpTracks() {
 //
@@ -50,13 +56,27 @@ class GameScene: SKScene {
         if pindah {
         let moving = SKAction.moveBy(x: 15, y: 0, duration: 0.1)
         let repeatAction = SKAction.repeatForever(moving)
-        fire?.run(repeatAction)
+            fire?.run(repeatAction, withKey: "moveRight")
+            
+            if (fire?.position.x) == UIScreen.main.bounds.maxX {
+                fire?.removeAction(forKey: "moveRight")
+            }
+            else {
+                fire?.run(repeatAction)
+            }
         }
         
         else {
-            let moving = SKAction.moveBy(x: -5, y: 0, duration: 0.1)
+            let moving = SKAction.moveBy(x: -15, y: 0, duration: 0.1)
             let repeatAction = SKAction.repeatForever(moving)
             fire?.run(repeatAction)
+            
+            if (fire?.position.x) == UIScreen.main.bounds.minX {
+                fire?.removeAction(forKey: "moveRight")
+            }
+            else {
+                fire?.run(repeatAction)
+            }
         }
     }
         
@@ -103,6 +123,23 @@ class GameScene: SKScene {
         
         fire!.addChild(flame)
         flame.position = CGPoint(x: 0, y: -50)
+    }
+    
+    func createShapes (type: shapes, forTrack track: Int) -> SKShapeNode? {
+        let shapeSprite = SKShapeNode()
+        
+        switch type {
+        case .target:
+            shapeSprite.path = CGPath(roundedRect: CGRect(x: -10, y: 0, width: 30, height: 30), cornerWidth: 20, cornerHeight: 20, transform: nil)
+            shapeSprite.fillColor = UIColor.red
+            
+        case .notTarget:
+            CGPath(roundedRect: CGRect(x: -10, y: 0, width: 30, height: 30), cornerWidth: 20, cornerHeight: 20, transform: nil)
+            shapeSprite.fillColor = UIColor.green
+        }
+        
+//        guard let shapePosition = tracksArray?[track].position else {return nil}
+        return shapeSprite
     }
     
     override func update(_ currentTime: TimeInterval) {
