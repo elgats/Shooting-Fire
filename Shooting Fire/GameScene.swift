@@ -56,14 +56,22 @@ class GameScene: SKScene {
         if pindah {
         let moving = SKAction.moveBy(x: 15, y: 0, duration: 0.1)
         let repeatAction = SKAction.repeatForever(moving)
-            fire?.run(repeatAction, withKey: "moveRight")
             
-            if (fire?.position.x) == UIScreen.main.bounds.maxX {
+            if ((fire?.position.x)!) <= UIScreen.main.bounds.maxX {
+            fire?.run(repeatAction, withKey: "moveRight")
+            }
+            
+            else {
                 fire?.removeAction(forKey: "moveRight")
             }
-            else {
-                fire?.run(repeatAction)
-            }
+//            fire?.run(repeatAction, withKey: "moveRight")
+//
+//            if (fire?.position.x) == UIScreen.main.bounds.maxX {
+//                fire?.removeAction(forKey: "moveRight")
+//            }
+//            else {
+//                fire?.run(repeatAction)
+//            }
         }
         
         else {
@@ -71,11 +79,12 @@ class GameScene: SKScene {
             let repeatAction = SKAction.repeatForever(moving)
             fire?.run(repeatAction)
             
-            if (fire?.position.x) == UIScreen.main.bounds.minX {
-                fire?.removeAction(forKey: "moveRight")
+            if ((fire?.position.x)!) <= UIScreen.main.bounds.minX {
+                fire?.run(repeatAction, withKey: "moveLeft")
             }
+                
             else {
-                fire?.run(repeatAction)
+                fire?.removeAction(forKey: "moveLeft")
             }
         }
     }
