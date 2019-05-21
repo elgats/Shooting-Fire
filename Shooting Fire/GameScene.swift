@@ -31,7 +31,9 @@ class GameScene: SKScene {
         var directionArray = [Bool]()
         var velocityArray = [Int]()
     
-
+    let fireCategory:UInt32 = 0x1 << 0
+    let shapeCategory:UInt32 = 0x1 << 1
+    let lineCategory:UInt32 = 0x1 << 2
     
 //    func setUpTracks() {
 //
@@ -169,7 +171,7 @@ class GameScene: SKScene {
     
     func createShapes (type: shapes, forTrack track: Int) -> SKShapeNode? {
         let shapeSprite = SKShapeNode()
-        
+        shapeSprite.name  = "SHAPES"
         switch type {
         case .target:
             shapeSprite.path = CGPath(roundedRect: CGRect(x: -40, y: 0, width: 90, height: 90), cornerWidth: 220, cornerHeight: 220, transform: nil)
@@ -205,8 +207,14 @@ class GameScene: SKScene {
                 self.addChild(newShape)
             }
         }
+        //Removing shapes
+        //we're goin through each childnode in nodetree, looking for the child named "SHAPES", then we get sknode for every child found
+        self.enumerateChildNodes(withName: "SHAPES") { (node:SKNode, nil) in //shapes need name
+            if node.position.y < -150 || node.position.y > self.size.height + 150 {
+            node.removeFromParent()
+        }
     }
-    
+    }
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
     }
