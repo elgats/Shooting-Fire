@@ -28,7 +28,7 @@ class GameScene: SKScene {
         var moveTrack = false
     
         let trackVelocities = [120, 150,200] //random speed for enemies
-        var directionArray = [Bool]()
+        //var directionArray = [Bool]()
         var velocityArray = [Int]()
     
     let fireCategory:UInt32 = 0x1 << 0
@@ -59,7 +59,7 @@ class GameScene: SKScene {
             for _ in 0 ... numberOfTracks {
                 let randomNumberForVelocity = GKRandomSource.sharedRandom().nextInt(upperBound: 3) //3 because we only have 3 options for speed
                 velocityArray.append(trackVelocities[randomNumberForVelocity])
-                    directionArray.append(GKRandomSource.sharedRandom().nextBool())
+//                    directionArray.append(GKRandomSource.sharedRandom().nextBool())
             }
         }
         
@@ -186,15 +186,15 @@ class GameScene: SKScene {
         }
         
         guard let shapePosition = tracksArray?[track].position else {return nil}
-        
-        let pindah = directionArray[track]
-        
+//
+//        let pindah = directionArray[track]
+//
         shapeSprite.position.x = shapePosition.x
-        shapeSprite.position.y = pindah ? 1300 : self.size.height + 130
+        shapeSprite.position.y = self.size.height + 130
         
         shapeSprite.physicsBody = SKPhysicsBody(edgeLoopFrom: shapeSprite.path!)
         
-        shapeSprite.physicsBody?.velocity = pindah ? CGVector(dx: 0, dy: -velocityArray[track]) : CGVector(dx: 0, dy: -velocityArray[track])
+        shapeSprite.physicsBody?.velocity = CGVector(dx: 0, dy: -velocityArray[track])
         
         return shapeSprite
     }
