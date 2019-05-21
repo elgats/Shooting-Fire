@@ -8,13 +8,46 @@
 
 import SpriteKit
 import GameplayKit
-
+import CoreMotion
 
 
 enum shapes:Int { //Int so that we can randomize it
     case target
     case notTarget
 }
+
+func +(left: CGPoint, right: CGPoint) -> CGPoint {
+    return CGPoint(x: left.x + right.x, y: left.y + right.y)
+}
+
+func -(left: CGPoint, right: CGPoint) -> CGPoint {
+    return CGPoint(x: left.x - right.x, y: left.y - right.y)
+}
+
+func *(point: CGPoint, scalar: CGFloat) -> CGPoint {
+    return CGPoint(x: point.x * scalar, y: point.y * scalar)
+}
+
+func /(point: CGPoint, scalar: CGFloat) -> CGPoint {
+    return CGPoint(x: point.x / scalar, y: point.y / scalar)
+}
+
+#if !(arch(x86_64) || arch(arm64))
+func sqrt(a: CGFloat) -> CGFloat {
+    return CGFloat(sqrtf(Float(a)))
+}
+#endif
+
+extension CGPoint {
+    func length() -> CGFloat {
+        return sqrt(x*x + y*y)
+    }
+    
+    func normalized() -> CGPoint {
+        return self / length()
+    }
+}
+
 
 class GameScene: SKScene {
     
@@ -45,9 +78,8 @@ class GameScene: SKScene {
 //        tracksArray?.first?.color = UIColor.white
 //
 //    }
-    
-    override func didMove(to view: SKView) {
-        
+        override func didMove(to view: SKView) {
+//        self.becomeFirstResponder()
         setUpTracks()
         createFire()
         sound()
@@ -233,7 +265,41 @@ class GameScene: SKScene {
             else if node?.name == "left" {
                 move(pindah: false)
             }
+            
+            let projectile = SKSpriteNode(imageNamed: "Particle")
+            projectile.position = fire!.position
+            let flame = SKEmitterNode(fileNamed: "FireParticle")!
+            projectile.addChild(flame)
+            flame.position = CGPoint(x: 0, y: -50)
+            // 3 - Determine offset of location to projectile
+            let offset = location - fire!.position
+            
+            // 4 - Bail out if you are shooting down or backwards
+            if offset.y < 0 { return }
+            //
+            // 5 - OK to add now - you've double checked position
+            addChild(projectile)
+            
+            // 6 - Get the direction of where to shoot
+            let direction = offset.normalized()
+            
+            // 7 - Make it shoot far enough to be guaranteed off screen
+            let shootAmount = direction * 1000
+            
+            // 8 - Add the shoot amount to the current position
+            let realDest = shootAmount + projectile.position
+            
+            // 9 - Create the actions
+            let actionMove = SKAction.move(to: realDest, duration: 2.0)
+            let actionMoveDone = SKAction.removeFromParent()
+            projectile.run(SKAction.sequence([actionMove, actionMoveDone]))
+            
+            self.run(shotSound)
+            
         }
+        
+        
+        
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -248,14 +314,19 @@ class GameScene: SKScene {
         fire?.removeAllActions()
     }
     
-    override func motionEnded(_ motion: UIEvent.EventSubtype,
-                     with event: UIEvent?) {
-//        if let fire = self.fire {
-//            let shooting = SKAction.moveBy(x: 0, y: 3000, duration: 2)
-//        fire.run(shooting)
-//
-//        createFire()
-        shoot()
-        }
+//    override func motionBegan(_ motion: UIEvent.EventSubtype,
+//                              with event: UIEvent?) {
+//        //        if let fire = self.fire {
+//        //            let shooting = SKAction.moveBy(x: 0, y: 3000, duration: 2)
+//        //        fire.run(shooting)
+//        //
+//        //        createFire()
+//        print("sdsdssd")
+//        shoot()
+//    }
    // }
+    func shake() {
+        print("shake")
+        shoot()
+    }
 }
