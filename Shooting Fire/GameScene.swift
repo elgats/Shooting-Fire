@@ -86,7 +86,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.run(SKAction.repeatForever(SKAction.sequence([SKAction.run {
             self.spawnShapes()
-        }, SKAction.wait(forDuration: 5)])))
+        }, SKAction.wait(forDuration: 2)])))
         } // call shape, wait a bit, call shape again
     
 
@@ -188,14 +188,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         if fireBody.categoryBitMask == fireCategory && otherBody.categoryBitMask == targetCategory {
             print("collide with target")
+            self.enumerateChildNodes(withName: "TARGET") { (node:SKNode, nil) in //shapes need name
+                    node.removeAllActions()
+//                    node.removeFromParent()
+//                
+            }
         }
 
         else if fireBody.categoryBitMask == fireCategory && otherBody.categoryBitMask == notTargetCategory {
             print("collide with non-target")
+            self.enumerateChildNodes(withName: "NOTTARGET") { (node:SKNode, nil) in //shapes need name
+////                  if node.position.y < -150 || node.position.y > self.size.height + 150 {
+                node.removeFromParent()
+                }
+            }
         }
         
         
-    }
+    
 
     func shake() {
         print("shake")

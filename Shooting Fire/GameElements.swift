@@ -63,9 +63,10 @@ extension GameScene {
     
     func createShapes (type: shapes, forTrack track: Int) -> SKShapeNode? {
         let shapeSprite = SKShapeNode()
-        shapeSprite.name  = "SHAPES"
+       // shapeSprite.name  = "SHAPES"
         switch type {
         case .target:
+            shapeSprite.name  = "TARGET"
             shapeSprite.path = CGPath(roundedRect: CGRect(x: -40, y: 0, width: 90, height: 90), cornerWidth: 220, cornerHeight: 220, transform: nil)
             shapeSprite.fillColor = UIColor(red: 238/255, green: 22/255, blue: 22/255, alpha: 1)
             shapeSprite.physicsBody = SKPhysicsBody(edgeLoopFrom: shapeSprite.path!)
@@ -74,6 +75,7 @@ extension GameScene {
             
             
         case .notTarget:
+           shapeSprite.name  = "NOTTARGET"
             shapeSprite.path = CGPath(roundedRect: CGRect(x: -40, y: 0, width: 90, height: 90), cornerWidth: 220, cornerHeight: 220, transform: nil)
             shapeSprite.fillColor = UIColor(red: 31/255, green: 204/255, blue: 0/255, alpha: 1)
             shapeSprite.physicsBody = SKPhysicsBody(edgeLoopFrom: shapeSprite.path!)

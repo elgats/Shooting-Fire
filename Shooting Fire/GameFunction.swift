@@ -16,7 +16,7 @@ extension GameScene {
             let moving = SKAction.moveBy(x: 15, y: 0, duration: 0.1)
             let repeatAction = SKAction.repeatForever(moving)
             
-            if ((fire?.position.x)!) <= 525 {
+            if ((fire?.position.x)!) <= 500 {
                 fire?.run(repeatAction, withKey: "moveRight")
             }
                 
@@ -29,9 +29,9 @@ extension GameScene {
         else {
             let moving = SKAction.moveBy(x: -15, y: 0, duration: 0.1)
             let repeatAction = SKAction.repeatForever(moving)
-            fire?.run(repeatAction)
+           // fire?.run(repeatAction)
             
-            if ((fire?.position.x)!) >= 50 {
+            if ((fire?.position.x)!) >= 160 {
                 fire?.run(repeatAction, withKey: "moveLeft")
             }
                 
@@ -81,8 +81,13 @@ extension GameScene {
         }
         //Removing shapes
         //we're goin through each childnode in nodetree, looking for the child named "SHAPES", then we get sknode for every child found
-        self.enumerateChildNodes(withName: "SHAPES") { (node:SKNode, nil) in //shapes need name
-            if node.position.y < -150 || node.position.y > self.size.height + 150 {
+        self.enumerateChildNodes(withName: "TARGET") { (node:SKNode, nil) in //shapes need name
+            if node.position.y < 250 {
+                node.removeFromParent()
+            }
+        }
+        self.enumerateChildNodes(withName: "NOTTARGET") { (node:SKNode, nil) in //shapes need name
+            if node.position.y < 220 {
                 node.removeFromParent()
             }
         }
