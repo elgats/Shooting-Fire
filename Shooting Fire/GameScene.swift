@@ -8,7 +8,7 @@
 
 import SpriteKit
 import GameplayKit
-import CoreMotion
+
 
 
 enum shapes:Int { //Int so that we can randomize it
@@ -49,10 +49,11 @@ extension CGPoint {
 }
 
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
         var tracksArray: [SKSpriteNode]? = [SKSpriteNode]() //() for initilizing tracks
         var fire: SKSpriteNode?
+        var line: SKSpriteNode?
         var currentTrack = 0
         let fireSound = SKAction.playSoundFileNamed("flameloop.wav", waitForCompletion: true)
     
@@ -67,7 +68,7 @@ class GameScene: SKScene {
     let fireCategory:UInt32 = 0x1 << 0
     let shapeCategory:UInt32 = 0x1 << 1
     let lineCategory:UInt32 = 0x1 << 2
-    
+//    let projectileCategory:UInt32 = 0x1
 //    func setUpTracks() {
 //
 //        for i in 0 ... 1 {
@@ -79,8 +80,11 @@ class GameScene: SKScene {
 //
 //    }
         override func didMove(to view: SKView) {
-//        self.becomeFirstResponder()
+        
+        self.physicsWorld.contactDelegate = self
+        physicsWorld.gravity = .zero
         setUpTracks()
+        createLine()
         createFire()
         sound()
 //        self.addChild(createShapes(type: .target, forTrack: 0)!)
@@ -187,8 +191,16 @@ class GameScene: SKScene {
 
     func createFire() {
         fire = SKSpriteNode(imageNamed: "Fire")
+        fire?.physicsBody = SKPhysicsBody(circleOfRadius: fire!.size.height / 2)
+        fire?.physicsBody?.linearDamping = 0
+        fire?.physicsBody?.isDynamic = true
+        fire?.physicsBody?.categoryBitMask = fireCategory
+        fire?.physicsBody?.collisionBitMask = shapeCategory
+        fire?.physicsBody?.contactTestBitMask = shapeCategory
+        
         
         fire?.position = CGPoint(x: size.width * 0.5, y: size.height * 0.3)
+        
         animateFire()
         self.addChild(fire!)
     }
@@ -199,6 +211,12 @@ class GameScene: SKScene {
         
         fire!.addChild(flame)
         flame.position = CGPoint(x: 0, y: -50)
+    }
+    
+    func createLine() {
+        let line = self.childNode(withName: "line") as? SKSpriteNode
+        line?.physicsBody = SKPhysicsBody(rectangleOf: line!.size)
+        line?.physicsBody?.collisionBitMask = lineCategory
     }
     
     func createShapes (type: shapes, forTrack track: Int) -> SKShapeNode? {
@@ -225,9 +243,11 @@ class GameScene: SKScene {
         shapeSprite.position.y = self.size.height + 130
         
         shapeSprite.physicsBody = SKPhysicsBody(edgeLoopFrom: shapeSprite.path!)
-        
+        shapeSprite.physicsBody?.isDynamic = true
+        shapeSprite.physicsBody?.categoryBitMask = shapeCategory
+        shapeSprite.physicsBody?.collisionBitMask = fireCategory | lineCategory
+        shapeSprite.physicsBody?.contactTestBitMask = fireCategory | lineCategory
         shapeSprite.physicsBody?.velocity = CGVector(dx: 0, dy: -velocityArray[track])
-        
         return shapeSprite
     }
     
@@ -247,6 +267,13 @@ class GameScene: SKScene {
         }
     }
     }
+    
+    func projectileDidCollideWithShape(projectile: SKSpriteNode, shapeSprite: SKShapeNode) {
+        print("Hit")
+        projectile.removeFromParent()
+        shapeSprite.removeFromParent()
+    }
+    
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
     }
@@ -294,6 +321,13 @@ class GameScene: SKScene {
             let actionMoveDone = SKAction.removeFromParent()
             projectile.run(SKAction.sequence([actionMove, actionMoveDone]))
             
+            projectile.physicsBody = SKPhysicsBody(circleOfRadius: fire!.size.width / 2)
+            projectile.physicsBody?.linearDamping = 0
+            projectile.physicsBody?.isDynamic = true
+            projectile.physicsBody?.categoryBitMask = fireCategory
+            projectile.physicsBody?.collisionBitMask = shapeCategory
+            projectile.physicsBody?.contactTestBitMask = shapeCategory
+            
             self.run(shotSound)
             
         }
@@ -314,6 +348,9 @@ class GameScene: SKScene {
         fire?.removeAllActions()
     }
     
+    func didBegin(_ contact: SKPhysicsContact) {
+        
+    }
 //    override func motionBegan(_ motion: UIEvent.EventSubtype,
 //                              with event: UIEvent?) {
 //        //        if let fire = self.fire {
