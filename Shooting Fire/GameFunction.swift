@@ -73,7 +73,7 @@ extension GameScene {
     
     func spawnShapes() {
         
-        for i in 0 ... 4 { //4 = number of tracks
+        for i in 0 ... 3 { //4 = number of tracks
             let randomShapeType = shapes(rawValue: GKRandomSource.sharedRandom().nextInt(upperBound: 2))!
             if let newShape = createShapes(type: randomShapeType, forTrack: i) {
                 self.addChild(newShape)
@@ -91,6 +91,18 @@ extension GameScene {
                 node.removeFromParent()
             }
         }
+    }
+    
+    func burn (targetPhysicsBody:SKPhysicsBody) {
+        let emitter = SKEmitterNode(fileNamed: "SmokeParticle.sks")
+        emitter?.position = CGPoint(x: 5, y: 35)
+        targetPhysicsBody.node?.addChild(emitter!)
+        
+        self.run(SKAction.wait(forDuration: 1)){
+        targetPhysicsBody.node?.removeFromParent()
+        }
+        
+        
     }
     
 }

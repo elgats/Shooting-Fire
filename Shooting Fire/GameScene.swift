@@ -56,8 +56,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
         let shotSound = SKAction.playSoundFileNamed("flamethrowerwav.wav", waitForCompletion: false)
         var moveTrack = false
-    
-        let trackVelocities = [120, 150,200] //random speed for enemies
+        
+        let trackVelocities = [100, 120, 190] //random speed for enemies
         //var directionArray = [Bool]()
         var velocityArray = [Int]()
     
@@ -86,7 +86,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.run(SKAction.repeatForever(SKAction.sequence([SKAction.run {
             self.spawnShapes()
-        }, SKAction.wait(forDuration: 2)])))
+        }, SKAction.wait(forDuration: 3)])))
         } // call shape, wait a bit, call shape again
     
 
@@ -189,20 +189,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if fireBody.categoryBitMask == fireCategory && otherBody.categoryBitMask == targetCategory {
             print("collide with target")
 //            self.enumerateChildNodes(withName: "TARGET")  (node:SKNode, nil) in //shapes need name
-////                    node.removeAllActions()
-            self.childNode(withName: "TARGET")?.removeFromParent()
+           // self.childNode(withName: "TARGET")?.removeAllActions(
 //                
-            
-            
+       burn(targetPhysicsBody: otherBody)
+//        otherBody.node?.removeFromParent()
+           // self.childNode(withName: "TARGET")?.removeFromParent()
+//            }
         }
 
         else if fireBody.categoryBitMask == fireCategory && otherBody.categoryBitMask == notTargetCategory {
             print("collide with non-target")
+          
             
 //            self.enumerateChildNodes(withName: "NOTTARGET")  (node:SKNode, nil) in //shapes need name
 //////                  if node.position.y < -150 || node.position.y > self.size.height + 150 {
 //                node.removeFromParent()
-  //              self.childNode(withName: "NOTTARGET")?.removeFromParent()
+            self.childNode(withName: "NOTTARGET")?.removeFromParent()
                 
           
             }

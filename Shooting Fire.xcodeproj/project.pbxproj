@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		AD086BD52295824600F50771 /* GameFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD086BD42295824600F50771 /* GameFunction.swift */; };
 		AD086BD72295850700F50771 /* GameElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD086BD62295850700F50771 /* GameElements.swift */; };
+		AD8CDFF4229678BF00EB8559 /* SmokeParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = AD8CDFF3229678BF00EB8559 /* SmokeParticle.sks */; };
+		AD8CDFF62296ED5200EB8559 /* wrong-buzzer.wav in Resources */ = {isa = PBXBuildFile; fileRef = AD8CDFF52296ED5200EB8559 /* wrong-buzzer.wav */; };
 		ADACE2252292462500016335 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADACE2242292462500016335 /* AppDelegate.swift */; };
 		ADACE2272292462500016335 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = ADACE2262292462500016335 /* GameScene.sks */; };
 		ADACE2292292462500016335 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = ADACE2282292462500016335 /* Actions.sks */; };
@@ -18,7 +20,6 @@
 		ADACE2322292462600016335 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADACE2312292462600016335 /* Assets.xcassets */; };
 		ADACE2352292462600016335 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADACE2332292462600016335 /* LaunchScreen.storyboard */; };
 		ADACE24322924FAA00016335 /* POL-sage-rage-short.wav in Resources */ = {isa = PBXBuildFile; fileRef = ADACE24122924FAA00016335 /* POL-sage-rage-short.wav */; };
-		ADACE24422924FAA00016335 /* bullet.wav in Resources */ = {isa = PBXBuildFile; fileRef = ADACE24222924FAA00016335 /* bullet.wav */; };
 		ADACE24822925D2B00016335 /* flameloop.wav in Resources */ = {isa = PBXBuildFile; fileRef = ADACE24722925D2B00016335 /* flameloop.wav */; };
 		ADACE24A229270FF00016335 /* FireParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = ADACE249229270FF00016335 /* FireParticle.sks */; };
 		ADACE24C22929D1900016335 /* flamethrowerwav.wav in Resources */ = {isa = PBXBuildFile; fileRef = ADACE24B22929D1900016335 /* flamethrowerwav.wav */; };
@@ -27,6 +28,8 @@
 /* Begin PBXFileReference section */
 		AD086BD42295824600F50771 /* GameFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFunction.swift; sourceTree = "<group>"; };
 		AD086BD62295850700F50771 /* GameElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameElements.swift; sourceTree = "<group>"; };
+		AD8CDFF3229678BF00EB8559 /* SmokeParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SmokeParticle.sks; sourceTree = "<group>"; };
+		AD8CDFF52296ED5200EB8559 /* wrong-buzzer.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "wrong-buzzer.wav"; sourceTree = "<group>"; };
 		ADACE2212292462500016335 /* Shooting Fire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shooting Fire.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADACE2242292462500016335 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADACE2262292462500016335 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -38,7 +41,6 @@
 		ADACE2342292462600016335 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ADACE2362292462600016335 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADACE24122924FAA00016335 /* POL-sage-rage-short.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "POL-sage-rage-short.wav"; sourceTree = "<group>"; };
-		ADACE24222924FAA00016335 /* bullet.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bullet.wav; sourceTree = "<group>"; };
 		ADACE24722925D2B00016335 /* flameloop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = flameloop.wav; sourceTree = "<group>"; };
 		ADACE249229270FF00016335 /* FireParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireParticle.sks; sourceTree = "<group>"; };
 		ADACE24B22929D1900016335 /* flamethrowerwav.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = flamethrowerwav.wav; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				ADACE2242292462500016335 /* AppDelegate.swift */,
 				ADACE2262292462500016335 /* GameScene.sks */,
 				ADACE249229270FF00016335 /* FireParticle.sks */,
+				AD8CDFF3229678BF00EB8559 /* SmokeParticle.sks */,
 				ADACE2282292462500016335 /* Actions.sks */,
 				ADACE22A2292462500016335 /* GameScene.swift */,
 				AD086BD42295824600F50771 /* GameFunction.swift */,
@@ -94,9 +97,9 @@
 		ADACE24022924FAA00016335 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				AD8CDFF52296ED5200EB8559 /* wrong-buzzer.wav */,
 				ADACE24B22929D1900016335 /* flamethrowerwav.wav */,
 				ADACE24122924FAA00016335 /* POL-sage-rage-short.wav */,
-				ADACE24222924FAA00016335 /* bullet.wav */,
 				ADACE24722925D2B00016335 /* flameloop.wav */,
 			);
 			path = Sounds;
@@ -160,6 +163,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD8CDFF4229678BF00EB8559 /* SmokeParticle.sks in Resources */,
 				ADACE24822925D2B00016335 /* flameloop.wav in Resources */,
 				ADACE24322924FAA00016335 /* POL-sage-rage-short.wav in Resources */,
 				ADACE2302292462500016335 /* Main.storyboard in Resources */,
@@ -167,8 +171,8 @@
 				ADACE2322292462600016335 /* Assets.xcassets in Resources */,
 				ADACE2352292462600016335 /* LaunchScreen.storyboard in Resources */,
 				ADACE24A229270FF00016335 /* FireParticle.sks in Resources */,
+				AD8CDFF62296ED5200EB8559 /* wrong-buzzer.wav in Resources */,
 				ADACE24C22929D1900016335 /* flamethrowerwav.wav in Resources */,
-				ADACE24422924FAA00016335 /* bullet.wav in Resources */,
 				ADACE2292292462500016335 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

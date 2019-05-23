@@ -16,9 +16,10 @@ enum shapes:Int { //Int so that we can randomize it
 
 extension GameScene {
 
+    
     func setUpTracks() {
         
-        for i in 0 ... 4 {
+        for i in 0 ... 3 {
             if let track = self.childNode(withName: "\(i)") as? SKSpriteNode {
                 tracksArray?.append(track)
             }
@@ -38,7 +39,7 @@ extension GameScene {
         //   fire?.physicsBody?.contactTestBitMask = shapeCategory
         
         
-        fire?.position = CGPoint(x: size.width * 0.5, y: size.height * 0.3)
+        fire?.position = CGPoint(x: size.width * 0.5, y: size.height * 0.25)
         
         animateFire()
         self.addChild(fire!)
