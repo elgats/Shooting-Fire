@@ -55,6 +55,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let fireSound = SKAction.playSoundFileNamed("flameloop.wav", waitForCompletion: true)
     
         let shotSound = SKAction.playSoundFileNamed("flamethrowerwav.wav", waitForCompletion: false)
+        let wrongTargetSound = SKAction.playSoundFileNamed("wrong-buzzer.wav", waitForCompletion: false)
         var moveTrack = false
         
         let trackVelocities = [100, 120, 190] //random speed for enemies
@@ -187,7 +188,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         if fireBody.categoryBitMask == fireCategory && otherBody.categoryBitMask == targetCategory {
-            print("collide with target")
+ //           print("collide with target")
 //            self.enumerateChildNodes(withName: "TARGET")  (node:SKNode, nil) in //shapes need name
            // self.childNode(withName: "TARGET")?.removeAllActions(
 //                
@@ -195,20 +196,45 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        otherBody.node?.removeFromParent()
            // self.childNode(withName: "TARGET")?.removeFromParent()
 //            }
+        
         }
 
         else if fireBody.categoryBitMask == fireCategory && otherBody.categoryBitMask == notTargetCategory {
-            print("collide with non-target")
+          print("collide with non-target")
           
             
 //            self.enumerateChildNodes(withName: "NOTTARGET")  (node:SKNode, nil) in //shapes need name
-//////                  if node.position.y < -150 || node.position.y > self.size.height + 150 {
+
 //                node.removeFromParent()
-            self.childNode(withName: "NOTTARGET")?.removeFromParent()
-                
+//        self.childNode(withName: "NOTTARGET")?.removeFromParent()
+            self.run(wrongTargetSound)
           
             }
+        
+        var line: SKPhysicsBody
+        var others: SKPhysicsBody
+        
+        if contact.bodyA.categoryBitMask > contact.bodyB.categoryBitMask {
+            line = contact.bodyA
+            others = contact.bodyB
         }
+        else {
+            line = contact.bodyB
+            others = contact.bodyA
+        }
+        
+        if line.categoryBitMask == lineCategory && others.categoryBitMask == targetCategory {
+            others.node?.removeFromParent()
+        
+        }
+        
+        else if line.categoryBitMask == lineCategory && others.categoryBitMask == notTargetCategory {
+         
+        others.node?.removeFromParent()
+            
+        }
+        
+    }
         
         
     

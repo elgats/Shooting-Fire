@@ -82,12 +82,12 @@ extension GameScene {
         //Removing shapes
         //we're goin through each childnode in nodetree, looking for the child named "SHAPES", then we get sknode for every child found
         self.enumerateChildNodes(withName: "TARGET") { (node:SKNode, nil) in //shapes need name
-            if node.position.y < 250 {
+            if node.position.y < 255 {
                 node.removeFromParent()
             }
         }
         self.enumerateChildNodes(withName: "NOTTARGET") { (node:SKNode, nil) in //shapes need name
-            if node.position.y < 250 {
+            if node.position.y < 255 {
                 node.removeFromParent()
             }
         }
@@ -100,6 +100,7 @@ extension GameScene {
         
         self.run(SKAction.wait(forDuration: 1)){
         targetPhysicsBody.node?.removeFromParent()
+
         }
         
         
