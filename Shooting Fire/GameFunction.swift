@@ -62,11 +62,11 @@ extension GameScene {
         let actionMoveDone = SKAction.removeFromParent()
         projectile.run(SKAction.sequence([actionMove, actionMoveDone]))
         
-        projectile.physicsBody = SKPhysicsBody(circleOfRadius: fire!.size.width / 2)
+        projectile.physicsBody = SKPhysicsBody(circleOfRadius: projectile.size.width)
         projectile.physicsBody?.linearDamping = 0
         projectile.physicsBody?.isDynamic = true
         projectile.physicsBody?.categoryBitMask = fireCategory
-        projectile.physicsBody?.collisionBitMask = targetCategory | notTargetCategory
+        projectile.physicsBody?.collisionBitMask = 0
         projectile.physicsBody?.contactTestBitMask = targetCategory | notTargetCategory
         projectile.physicsBody?.usesPreciseCollisionDetection = true
     }
@@ -87,7 +87,7 @@ extension GameScene {
             }
         }
         self.enumerateChildNodes(withName: "NOTTARGET") { (node:SKNode, nil) in //shapes need name
-            if node.position.y < 220 {
+            if node.position.y < 250 {
                 node.removeFromParent()
             }
         }

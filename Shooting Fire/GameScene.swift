@@ -145,11 +145,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let actionMoveDone = SKAction.removeFromParent()
             projectile.run(SKAction.sequence([actionMove, actionMoveDone]))
             
-            projectile.physicsBody = SKPhysicsBody(circleOfRadius: fire!.size.width / 2)
+            projectile.physicsBody = SKPhysicsBody(circleOfRadius: fire!.size.width)
             projectile.physicsBody?.linearDamping = 0
             projectile.physicsBody?.isDynamic = true
             projectile.physicsBody?.categoryBitMask = fireCategory
-            projectile.physicsBody?.collisionBitMask = targetCategory | notTargetCategory
+            projectile.physicsBody?.collisionBitMask = 0
          //   projectile.physicsBody?.contactTestBitMask = shapeCategory
             projectile.physicsBody?.usesPreciseCollisionDetection = true
             
@@ -188,19 +188,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         if fireBody.categoryBitMask == fireCategory && otherBody.categoryBitMask == targetCategory {
             print("collide with target")
-            self.enumerateChildNodes(withName: "TARGET") { (node:SKNode, nil) in //shapes need name
-                    node.removeAllActions()
-//                    node.removeFromParent()
+//            self.enumerateChildNodes(withName: "TARGET")  (node:SKNode, nil) in //shapes need name
+////                    node.removeAllActions()
+            self.childNode(withName: "TARGET")?.removeFromParent()
 //                
-            }
+            
+            
         }
 
         else if fireBody.categoryBitMask == fireCategory && otherBody.categoryBitMask == notTargetCategory {
             print("collide with non-target")
-            self.enumerateChildNodes(withName: "NOTTARGET") { (node:SKNode, nil) in //shapes need name
-////                  if node.position.y < -150 || node.position.y > self.size.height + 150 {
-                node.removeFromParent()
-                }
+            
+//            self.enumerateChildNodes(withName: "NOTTARGET")  (node:SKNode, nil) in //shapes need name
+//////                  if node.position.y < -150 || node.position.y > self.size.height + 150 {
+//                node.removeFromParent()
+  //              self.childNode(withName: "NOTTARGET")?.removeFromParent()
+                
+          
             }
         }
         

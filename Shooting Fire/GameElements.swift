@@ -28,11 +28,13 @@ extension GameScene {
     
     func createFire() {
         fire = SKSpriteNode(imageNamed: "Fire")
-        fire?.physicsBody = SKPhysicsBody(circleOfRadius: fire!.size.height / 2)
+        fire?.physicsBody = SKPhysicsBody(circleOfRadius: fire!.size.height)
         fire?.physicsBody?.linearDamping = 0
         fire?.physicsBody?.isDynamic = true
         fire?.physicsBody?.categoryBitMask = fireCategory
         fire?.physicsBody?.collisionBitMask = 0
+        fire?.physicsBody?.usesPreciseCollisionDetection = true
+        
         //   fire?.physicsBody?.contactTestBitMask = shapeCategory
         
         
@@ -73,6 +75,9 @@ extension GameScene {
             shapeSprite.physicsBody?.isDynamic = true
             shapeSprite.physicsBody?.categoryBitMask = targetCategory
             
+            shapeSprite.physicsBody?.collisionBitMask = 0
+            shapeSprite.physicsBody?.contactTestBitMask = fireCategory | lineCategory
+
             
         case .notTarget:
            shapeSprite.name  = "NOTTARGET"
@@ -81,6 +86,10 @@ extension GameScene {
             shapeSprite.physicsBody = SKPhysicsBody(edgeLoopFrom: shapeSprite.path!)
             shapeSprite.physicsBody?.isDynamic = true
             shapeSprite.physicsBody?.categoryBitMask = notTargetCategory
+           
+           shapeSprite.physicsBody?.collisionBitMask = 0
+           shapeSprite.physicsBody?.contactTestBitMask = fireCategory | lineCategory
+
         }
         
         guard let shapePosition = tracksArray?[track].position else {return nil}
@@ -91,9 +100,6 @@ extension GameScene {
         shapeSprite.position.y = self.size.height + 130
         
         
-        
-        shapeSprite.physicsBody?.collisionBitMask = fireCategory | lineCategory
-        shapeSprite.physicsBody?.contactTestBitMask = fireCategory | lineCategory
         shapeSprite.physicsBody?.velocity = CGVector(dx: 0, dy: -velocityArray[track])
         return shapeSprite
     }
