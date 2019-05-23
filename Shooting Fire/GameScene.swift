@@ -63,9 +63,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var velocityArray = [Int]()
     
     let fireCategory:UInt32 = 0x1 << 0
-    let targetCategory:UInt32 = 0x1 << 1
-    let notTargetCategory:UInt32 = 0x1 << 2
-    let lineCategory:UInt32 = 0x1 << 3
+    let projectileCategory:UInt32 = 0x1 << 1
+    let targetCategory:UInt32 = 0x1 << 2
+    let notTargetCategory:UInt32 = 0x1 << 3
+    let lineCategory:UInt32 = 0x1 << 4
 
         override func didMove(to view: SKView) {
         
@@ -149,7 +150,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             projectile.physicsBody = SKPhysicsBody(circleOfRadius: fire!.size.width)
             projectile.physicsBody?.linearDamping = 0
             projectile.physicsBody?.isDynamic = true
-            projectile.physicsBody?.categoryBitMask = fireCategory
+            projectile.physicsBody?.categoryBitMask = projectileCategory
             projectile.physicsBody?.collisionBitMask = 0
          //   projectile.physicsBody?.contactTestBitMask = shapeCategory
             projectile.physicsBody?.usesPreciseCollisionDetection = true
@@ -188,25 +189,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         if fireBody.categoryBitMask == fireCategory && otherBody.categoryBitMask == targetCategory {
- //           print("collide with target")
-//            self.enumerateChildNodes(withName: "TARGET")  (node:SKNode, nil) in //shapes need name
-           // self.childNode(withName: "TARGET")?.removeAllActions(
+
 //                
        burn(targetPhysicsBody: otherBody)
-//        otherBody.node?.removeFromParent()
-           // self.childNode(withName: "TARGET")?.removeFromParent()
-//            }
+
         
         }
 
         else if fireBody.categoryBitMask == fireCategory && otherBody.categoryBitMask == notTargetCategory {
           print("collide with non-target")
           
-            
-//            self.enumerateChildNodes(withName: "NOTTARGET")  (node:SKNode, nil) in //shapes need name
-
-//                node.removeFromParent()
-//        self.childNode(withName: "NOTTARGET")?.removeFromParent()
             self.run(wrongTargetSound)
           
             }
@@ -234,6 +226,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         }
         
+        var projectileBody: SKPhysicsBody
+        var shapeBody: SKPhysicsBody
+        
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+            projectileBody = contact.bodyA
+            shapeBody = contact.bodyB
+        }
+        else {
+            projectileBody = contact.bodyB
+            shapeBody = contact.bodyA
+        }
+        
+        if projectileBody.categoryBitMask == projectileCategory && shapeBody.categoryBitMask == targetCategory {
+
+            burn(targetPhysicsBody: otherBody)
+            projectileBody.node?.removeFromParent()
+        }
+            
+        else if projectileBody.categoryBitMask == projectileCategory && shapeBody.categoryBitMask == notTargetCategory {
+            print("collide with non-target")
+            
+
+            self.run(wrongTargetSound)
+            
+        }
     }
         
         

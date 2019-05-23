@@ -77,7 +77,7 @@ extension GameScene {
             shapeSprite.physicsBody?.categoryBitMask = targetCategory
             
             shapeSprite.physicsBody?.collisionBitMask = 0
-            shapeSprite.physicsBody?.contactTestBitMask = fireCategory | lineCategory
+            shapeSprite.physicsBody?.contactTestBitMask = fireCategory | lineCategory | projectileCategory
 
             
         case .notTarget:
@@ -89,7 +89,7 @@ extension GameScene {
             shapeSprite.physicsBody?.categoryBitMask = notTargetCategory
            
            shapeSprite.physicsBody?.collisionBitMask = 0
-           shapeSprite.physicsBody?.contactTestBitMask = fireCategory | lineCategory
+           shapeSprite.physicsBody?.contactTestBitMask = fireCategory | lineCategory | projectileCategory
 
         }
         

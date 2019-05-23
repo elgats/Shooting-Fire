@@ -65,7 +65,7 @@ extension GameScene {
         projectile.physicsBody = SKPhysicsBody(circleOfRadius: projectile.size.width)
         projectile.physicsBody?.linearDamping = 0
         projectile.physicsBody?.isDynamic = true
-        projectile.physicsBody?.categoryBitMask = fireCategory
+        projectile.physicsBody?.categoryBitMask = projectileCategory
         projectile.physicsBody?.collisionBitMask = 0
         projectile.physicsBody?.contactTestBitMask = targetCategory | notTargetCategory
         projectile.physicsBody?.usesPreciseCollisionDetection = true
