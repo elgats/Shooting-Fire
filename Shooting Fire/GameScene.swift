@@ -55,10 +55,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let fireSound = SKAction.playSoundFileNamed("flameloop.wav", waitForCompletion: true)
     
         let shotSound = SKAction.playSoundFileNamed("flamethrowerwav.wav", waitForCompletion: false)
-        let wrongTargetSound = SKAction.playSoundFileNamed("wrong-buzzer.wav", waitForCompletion: false)
+        let wrongTargetSound = SKAction.playSoundFileNamed("wrong-buzzer.wav", waitForCompletion: true)
         var moveTrack = false
         
-        let trackVelocities = [100, 120, 190] //random speed for enemies
+        let trackVelocities = [160, 120, 100, 80, 200] //random speed for enemies
         //var directionArray = [Bool]()
         var velocityArray = [Int]()
     
@@ -67,12 +67,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let targetCategory:UInt32 = 0x1 << 2
     let notTargetCategory:UInt32 = 0x1 << 3
     let lineCategory:UInt32 = 0x1 << 4
+    
+    //HUD
+    
+    var instruction:SKLabelNode?
+  //  var timeLabel:SKLabelNode?
+    var scoreLabel:SKLabelNode?
+    
+//    var remainingTime:TimeInterval = 5 {
+//        didSet {
+//            self.timeLabel?.text = "Stop for: \(self.remainingTime)"
+//        }
+//    }
+//    
+    var currentScore:Int = 0 {
+        didSet {
+            self.scoreLabel?.text = "Score: \(self.currentScore)"
+        }
+    }
 
         override func didMove(to view: SKView) {
         
         self.physicsWorld.contactDelegate = self
         physicsWorld.gravity = .zero
         setUpTracks()
+        createHUD()
         createLine()
         createFire()
         sound()
@@ -190,15 +209,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         if fireBody.categoryBitMask == fireCategory && otherBody.categoryBitMask == targetCategory {
 
+        currentScore += 1
 //                
        burn(targetPhysicsBody: otherBody)
-
+           
         
         }
 
         else if fireBody.categoryBitMask == fireCategory && otherBody.categoryBitMask == notTargetCategory {
           print("collide with non-target")
-          
+            currentScore -= 1
+            otherBody.node?.removeFromParent()
             self.run(wrongTargetSound)
           
             }
@@ -217,12 +238,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if line.categoryBitMask == lineCategory && others.categoryBitMask == targetCategory {
             others.node?.removeFromParent()
-        
+            currentScore -= 1
         }
         
         else if line.categoryBitMask == lineCategory && others.categoryBitMask == notTargetCategory {
-         
-        others.node?.removeFromParent()
+         self.currentScore += 1
+        congrats(notTargetBody: others)
             
         }
         
@@ -239,15 +260,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if projectileBody.categoryBitMask == projectileCategory && shapeBody.categoryBitMask == targetCategory {
+            
+           currentScore += 1
 
             burn(targetPhysicsBody: otherBody)
             projectileBody.node?.removeFromParent()
+            
+            
         }
             
         else if projectileBody.categoryBitMask == projectileCategory && shapeBody.categoryBitMask == notTargetCategory {
             print("collide with non-target")
             
-
+            currentScore -= 1
+           // self.run(currentScore -= 1), waitForCompletion: true
+            shapeBody.node?.removeFromParent()
+            projectileBody.node?.removeFromParent()
+            
             self.run(wrongTargetSound)
             
         }
@@ -260,4 +289,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         print("shake")
         shoot()
     }
+    
+    
 }

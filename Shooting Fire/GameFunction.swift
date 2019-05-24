@@ -10,6 +10,8 @@ import SpriteKit
 import GameplayKit
 
 extension GameScene {
+    
+    
 
     func move (pindah: Bool) {
         if pindah {
@@ -98,12 +100,31 @@ extension GameScene {
         emitter?.position = CGPoint(x: 5, y: 35)
         targetPhysicsBody.node?.addChild(emitter!)
         
-        self.run(SKAction.wait(forDuration: 1)){
+        self.run(SKAction.wait(forDuration: 0.2)){
         targetPhysicsBody.node?.removeFromParent()
-
+   //  self.currentScore += 1
         }
-        
-        
+  
     }
     
+    func congrats (notTargetBody:SKPhysicsBody) {
+        let emitter = SKEmitterNode(fileNamed: "SparkParticle.sks")
+
+        emitter?.position = CGPoint(x: 5, y: 35)
+        notTargetBody.node?.addChild(emitter!)
+
+        self.run(SKAction.wait(forDuration: 0.1)){
+            notTargetBody.node?.removeFromParent()
+            
+        }
+    }
+    
+    
+    func createHUD() {
+        scoreLabel = self.childNode(withName: "scoreLabel") as? SKLabelNode
+        
+        currentScore = 0
+    }
+    
+
 }

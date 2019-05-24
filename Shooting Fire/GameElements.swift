@@ -72,11 +72,14 @@ extension GameScene {
             shapeSprite.name  = "TARGET"
             shapeSprite.path = CGPath(roundedRect: CGRect(x: -40, y: 0, width: 90, height: 90), cornerWidth: 220, cornerHeight: 220, transform: nil)
             shapeSprite.fillColor = UIColor(red: 238/255, green: 22/255, blue: 22/255, alpha: 1)
+            shapeSprite.fillTexture = SKTexture.init(image: UIImage(named: "Devil")!)
+            shapeSprite.glowWidth = 2
+            shapeSprite.strokeColor = #colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1)
             shapeSprite.physicsBody = SKPhysicsBody(edgeLoopFrom: shapeSprite.path!)
-            shapeSprite.physicsBody?.isDynamic = true
+          //  shapeSprite.physicsBody?.isDynamic = true
             shapeSprite.physicsBody?.categoryBitMask = targetCategory
             
-            shapeSprite.physicsBody?.collisionBitMask = 0
+            shapeSprite.physicsBody?.collisionBitMask = fireCategory | projectileCategory
             shapeSprite.physicsBody?.contactTestBitMask = fireCategory | lineCategory | projectileCategory
 
             
@@ -84,8 +87,9 @@ extension GameScene {
            shapeSprite.name  = "NOTTARGET"
             shapeSprite.path = CGPath(roundedRect: CGRect(x: -40, y: 0, width: 90, height: 90), cornerWidth: 220, cornerHeight: 220, transform: nil)
             shapeSprite.fillColor = UIColor(red: 31/255, green: 204/255, blue: 0/255, alpha: 1)
+           shapeSprite.fillTexture = SKTexture.init(image: UIImage(named: "Good")!)
             shapeSprite.physicsBody = SKPhysicsBody(edgeLoopFrom: shapeSprite.path!)
-            shapeSprite.physicsBody?.isDynamic = true
+          //  shapeSprite.physicsBody?.isDynamic = true
             shapeSprite.physicsBody?.categoryBitMask = notTargetCategory
            
            shapeSprite.physicsBody?.collisionBitMask = 0
