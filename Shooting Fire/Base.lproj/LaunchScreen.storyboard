@@ -22,7 +22,7 @@
                                 <rect key="frame" x="-33" y="0.0" width="480" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Api besar" translatesAutoresizingMaskIntoConstraints="NO" id="QRD-ei-9GU">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="fire8" translatesAutoresizingMaskIntoConstraints="NO" id="QRD-ei-9GU">
                                 <rect key="frame" x="82" y="299" width="251" height="184"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -44,7 +44,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Api besar" width="220" height="326"/>
         <image name="background-launch" width="166.5" height="360.5"/>
+        <image name="fire8" width="108" height="159"/>
     </resources>
 </document>

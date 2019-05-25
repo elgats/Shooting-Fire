@@ -12,6 +12,7 @@ import CoreMotion
 
 
 
+
 func +(left: CGPoint, right: CGPoint) -> CGPoint {
     return CGPoint(x: left.x + right.x, y: left.y + right.y)
 }
@@ -52,10 +53,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var projectile: SKSpriteNode?
         var line: SKSpriteNode?
         var currentTrack = 0
+    
+    //sounds
         let fireSound = SKAction.playSoundFileNamed("flameloop.wav", waitForCompletion: true)
     
         let shotSound = SKAction.playSoundFileNamed("flamethrowerwav.wav", waitForCompletion: false)
         let wrongTargetSound = SKAction.playSoundFileNamed("wrong-buzzer.wav", waitForCompletion: true)
+        var backgroundNoise = SKAction.playSoundFileNamed("authormusic-drone-electronics-build-up.mp3", waitForCompletion: true)
+    
+    
         var moveTrack = false
         
         let trackVelocities = [160, 120, 100, 80, 200] //random speed for enemies
@@ -69,17 +75,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let lineCategory:UInt32 = 0x1 << 4
     
     //HUD
+ 
+    var heart1:SKSpriteNode?
+    var heart2:SKSpriteNode?
+    var heart3:SKSpriteNode?
+    var lives: [SKSpriteNode]?
     
-    var instruction:SKLabelNode?
-  //  var timeLabel:SKLabelNode?
+    var pause:SKSpriteNode?
     var scoreLabel:SKLabelNode?
-    
-//    var remainingTime:TimeInterval = 5 {
-//        didSet {
-//            self.timeLabel?.text = "Stop for: \(self.remainingTime)"
-//        }
-//    }
-//    
     var currentScore:Int = 0 {
         didSet {
             self.scoreLabel?.text = "Score: \(self.currentScore)"
@@ -92,9 +95,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.gravity = .zero
         setUpTracks()
         createHUD()
+        createHearts()
         createLine()
         createFire()
         sound()
+        
 
         
         if let numberOfTracks = tracksArray?.count {
@@ -122,6 +127,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Called before each frame is rendered
     }
     
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             let location = touch.previousLocation(in: self)
@@ -136,6 +142,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             else if node?.name == "left" {
                 move(pindah: false)
             }
+                
+            else if node?.name == "PauseButton", let scene = self.scene {
+                if scene.isPaused {
+                    scene.isPaused = false
+                }
+                else {
+                    scene.isPaused = true
+                    //play?.isHidden = false
+                    
+                }
+            }
+            
             else {
             
             let projectile = SKSpriteNode(imageNamed: "Particle")
@@ -221,7 +239,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             currentScore -= 1
             otherBody.node?.removeFromParent()
             self.run(wrongTargetSound)
-          
+          //  livesReduced()
+            lives?.first?.removeFromParent()
             }
         
         var line: SKPhysicsBody
@@ -239,6 +258,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if line.categoryBitMask == lineCategory && others.categoryBitMask == targetCategory {
             others.node?.removeFromParent()
             currentScore -= 1
+            //livesReduced()
+            lives?.first?.removeFromParent()
         }
         
         else if line.categoryBitMask == lineCategory && others.categoryBitMask == notTargetCategory {
@@ -276,7 +297,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
            // self.run(currentScore -= 1), waitForCompletion: true
             shapeBody.node?.removeFromParent()
             projectileBody.node?.removeFromParent()
-            
+          //  livesReduced()
+            lives?.first?.removeFromParent()
             self.run(wrongTargetSound)
             
         }

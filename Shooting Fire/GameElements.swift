@@ -55,6 +55,8 @@ extension GameScene {
     func sound() {
         let loopSound:SKAction = SKAction.repeatForever(fireSound)
         self.run(loopSound)
+        let backgroundMusic:SKAction = SKAction.repeatForever(backgroundNoise)
+        self.run(backgroundMusic)
     }
     
     func createLine() {

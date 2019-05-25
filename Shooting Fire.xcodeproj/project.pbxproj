@@ -11,6 +11,12 @@
 		AD086BD72295850700F50771 /* GameElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD086BD62295850700F50771 /* GameElements.swift */; };
 		AD1A7C8A22981C7600DF0B8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD1A7C8822981C7600DF0B8A /* Assets.xcassets */; };
 		AD1A7C8C22981C9E00DF0B8A /* SparkParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = AD1A7C8B22981C9E00DF0B8A /* SparkParticle.sks */; };
+		AD1A7C8E2298483300DF0B8A /* StartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = AD1A7C8D2298483300DF0B8A /* StartScene.sks */; };
+		AD1A7C9222984A6B00DF0B8A /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1A7C9122984A6B00DF0B8A /* StartScene.swift */; };
+		AD1A7C9A22984D8100DF0B8A /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = AD1A7C9922984D8100DF0B8A /* GameOverScene.sks */; };
+		AD1A7C9D22984ED300DF0B8A /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1A7C9C22984ED300DF0B8A /* GameOverScene.swift */; };
+		AD79F72F2298E34100E70698 /* authormusic-drone-electronics-build-up.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD79F72E2298E34100E70698 /* authormusic-drone-electronics-build-up.mp3 */; };
+		AD79F7312298F06D00E70698 /* Evil_Laugh_Male_6-Himan-1359990674.wav in Resources */ = {isa = PBXBuildFile; fileRef = AD79F7302298F06D00E70698 /* Evil_Laugh_Male_6-Himan-1359990674.wav */; };
 		AD8CDFF4229678BF00EB8559 /* SmokeParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = AD8CDFF3229678BF00EB8559 /* SmokeParticle.sks */; };
 		AD8CDFF62296ED5200EB8559 /* wrong-buzzer.wav in Resources */ = {isa = PBXBuildFile; fileRef = AD8CDFF52296ED5200EB8559 /* wrong-buzzer.wav */; };
 		ADACE2252292462500016335 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADACE2242292462500016335 /* AppDelegate.swift */; };
@@ -21,7 +27,6 @@
 		ADACE2302292462500016335 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADACE22E2292462500016335 /* Main.storyboard */; };
 		ADACE2322292462600016335 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADACE2312292462600016335 /* Assets.xcassets */; };
 		ADACE2352292462600016335 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADACE2332292462600016335 /* LaunchScreen.storyboard */; };
-		ADACE24322924FAA00016335 /* POL-sage-rage-short.wav in Resources */ = {isa = PBXBuildFile; fileRef = ADACE24122924FAA00016335 /* POL-sage-rage-short.wav */; };
 		ADACE24822925D2B00016335 /* flameloop.wav in Resources */ = {isa = PBXBuildFile; fileRef = ADACE24722925D2B00016335 /* flameloop.wav */; };
 		ADACE24A229270FF00016335 /* FireParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = ADACE249229270FF00016335 /* FireParticle.sks */; };
 		ADACE24C22929D1900016335 /* flamethrowerwav.wav in Resources */ = {isa = PBXBuildFile; fileRef = ADACE24B22929D1900016335 /* flamethrowerwav.wav */; };
@@ -32,6 +37,12 @@
 		AD086BD62295850700F50771 /* GameElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameElements.swift; sourceTree = "<group>"; };
 		AD1A7C8822981C7600DF0B8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD1A7C8B22981C9E00DF0B8A /* SparkParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SparkParticle.sks; sourceTree = "<group>"; };
+		AD1A7C8D2298483300DF0B8A /* StartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StartScene.sks; sourceTree = "<group>"; };
+		AD1A7C9122984A6B00DF0B8A /* StartScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
+		AD1A7C9922984D8100DF0B8A /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
+		AD1A7C9C22984ED300DF0B8A /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		AD79F72E2298E34100E70698 /* authormusic-drone-electronics-build-up.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "authormusic-drone-electronics-build-up.mp3"; sourceTree = "<group>"; };
+		AD79F7302298F06D00E70698 /* Evil_Laugh_Male_6-Himan-1359990674.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Evil_Laugh_Male_6-Himan-1359990674.wav"; sourceTree = "<group>"; };
 		AD8CDFF3229678BF00EB8559 /* SmokeParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SmokeParticle.sks; sourceTree = "<group>"; };
 		AD8CDFF52296ED5200EB8559 /* wrong-buzzer.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "wrong-buzzer.wav"; sourceTree = "<group>"; };
 		ADACE2212292462500016335 /* Shooting Fire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shooting Fire.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,7 +55,6 @@
 		ADACE2312292462600016335 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ADACE2342292462600016335 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ADACE2362292462600016335 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ADACE24122924FAA00016335 /* POL-sage-rage-short.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "POL-sage-rage-short.wav"; sourceTree = "<group>"; };
 		ADACE24722925D2B00016335 /* flameloop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = flameloop.wav; sourceTree = "<group>"; };
 		ADACE249229270FF00016335 /* FireParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireParticle.sks; sourceTree = "<group>"; };
 		ADACE24B22929D1900016335 /* flamethrowerwav.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = flamethrowerwav.wav; sourceTree = "<group>"; };
@@ -61,6 +71,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD79F7322298F4C600E70698 /* Game Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				ADACE2262292462500016335 /* GameScene.sks */,
+				AD1A7C8D2298483300DF0B8A /* StartScene.sks */,
+				AD1A7C9922984D8100DF0B8A /* GameOverScene.sks */,
+			);
+			path = "Game Scenes";
+			sourceTree = "<group>";
+		};
+		AD79F7332298F51400E70698 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				ADACE249229270FF00016335 /* FireParticle.sks */,
+				AD8CDFF3229678BF00EB8559 /* SmokeParticle.sks */,
+				AD1A7C8B22981C9E00DF0B8A /* SparkParticle.sks */,
+			);
+			path = Particles;
+			sourceTree = "<group>";
+		};
 		ADACE2182292462400016335 = {
 			isa = PBXGroup;
 			children = (
@@ -82,12 +112,12 @@
 			isa = PBXGroup;
 			children = (
 				ADACE2242292462500016335 /* AppDelegate.swift */,
-				ADACE2262292462500016335 /* GameScene.sks */,
-				ADACE249229270FF00016335 /* FireParticle.sks */,
-				AD8CDFF3229678BF00EB8559 /* SmokeParticle.sks */,
-				AD1A7C8B22981C9E00DF0B8A /* SparkParticle.sks */,
+				AD79F7322298F4C600E70698 /* Game Scenes */,
+				AD1A7C9122984A6B00DF0B8A /* StartScene.swift */,
+				AD79F7332298F51400E70698 /* Particles */,
 				ADACE2282292462500016335 /* Actions.sks */,
 				ADACE22A2292462500016335 /* GameScene.swift */,
+				AD1A7C9C22984ED300DF0B8A /* GameOverScene.swift */,
 				AD086BD42295824600F50771 /* GameFunction.swift */,
 				AD086BD62295850700F50771 /* GameElements.swift */,
 				ADACE22C2292462500016335 /* GameViewController.swift */,
@@ -105,8 +135,9 @@
 			children = (
 				AD8CDFF52296ED5200EB8559 /* wrong-buzzer.wav */,
 				ADACE24B22929D1900016335 /* flamethrowerwav.wav */,
-				ADACE24122924FAA00016335 /* POL-sage-rage-short.wav */,
 				ADACE24722925D2B00016335 /* flameloop.wav */,
+				AD79F72E2298E34100E70698 /* authormusic-drone-electronics-build-up.mp3 */,
+				AD79F7302298F06D00E70698 /* Evil_Laugh_Male_6-Himan-1359990674.wav */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -170,17 +201,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD8CDFF4229678BF00EB8559 /* SmokeParticle.sks in Resources */,
+				AD79F7312298F06D00E70698 /* Evil_Laugh_Male_6-Himan-1359990674.wav in Resources */,
 				ADACE24822925D2B00016335 /* flameloop.wav in Resources */,
-				ADACE24322924FAA00016335 /* POL-sage-rage-short.wav in Resources */,
 				ADACE2302292462500016335 /* Main.storyboard in Resources */,
 				ADACE2272292462500016335 /* GameScene.sks in Resources */,
 				AD1A7C8A22981C7600DF0B8A /* Assets.xcassets in Resources */,
 				ADACE2322292462600016335 /* Assets.xcassets in Resources */,
+				AD1A7C8E2298483300DF0B8A /* StartScene.sks in Resources */,
+				AD79F72F2298E34100E70698 /* authormusic-drone-electronics-build-up.mp3 in Resources */,
 				ADACE2352292462600016335 /* LaunchScreen.storyboard in Resources */,
 				ADACE24A229270FF00016335 /* FireParticle.sks in Resources */,
 				AD8CDFF62296ED5200EB8559 /* wrong-buzzer.wav in Resources */,
 				AD1A7C8C22981C9E00DF0B8A /* SparkParticle.sks in Resources */,
 				ADACE24C22929D1900016335 /* flamethrowerwav.wav in Resources */,
+				AD1A7C9A22984D8100DF0B8A /* GameOverScene.sks in Resources */,
 				ADACE2292292462500016335 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -193,6 +227,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD086BD72295850700F50771 /* GameElements.swift in Sources */,
+				AD1A7C9222984A6B00DF0B8A /* StartScene.swift in Sources */,
+				AD1A7C9D22984ED300DF0B8A /* GameOverScene.swift in Sources */,
 				ADACE22B2292462500016335 /* GameScene.swift in Sources */,
 				AD086BD52295824600F50771 /* GameFunction.swift in Sources */,
 				ADACE22D2292462500016335 /* GameViewController.swift in Sources */,

@@ -21,7 +21,7 @@ class GameViewController: UIViewController {
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "GameScene") {
+            if let scene = SKScene(fileNamed: "StartScene") {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
                 
@@ -34,13 +34,7 @@ class GameViewController: UIViewController {
     
     override func motionBegan(_ motion: UIEvent.EventSubtype,
                               with event: UIEvent?) {
-        //        if let fire = self.fire {
-        //            let shooting = SKAction.moveBy(x: 0, y: 3000, duration: 2)
-        //        fire.run(shooting)
-        //
-        //        createFire()
-//        print("sdsdssd")
-        //shoot()
+  
         if motion == .motionShake {
             if let skView = view as? SKView, let scene = skView.scene as? GameScene{
                 scene.shake()

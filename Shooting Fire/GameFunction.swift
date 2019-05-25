@@ -33,7 +33,7 @@ extension GameScene {
             let repeatAction = SKAction.repeatForever(moving)
            // fire?.run(repeatAction)
             
-            if ((fire?.position.x)!) >= 160 {
+            if ((fire?.position.x)!) >= 220 {
                 fire?.run(repeatAction, withKey: "moveLeft")
             }
                 
@@ -119,12 +119,29 @@ extension GameScene {
         }
     }
     
+    func createHearts() {
+        let heart1:SKSpriteNode = self.childNode(withName: "heart1") as! SKSpriteNode
+        let heart2:SKSpriteNode = self.childNode(withName: "heart2") as! SKSpriteNode
+        let heart3:SKSpriteNode = self.childNode(withName: "heart3") as! SKSpriteNode
+         var lives: [SKSpriteNode] = [heart1, heart2, heart3]
+        
+    }
     
     func createHUD() {
+        pause =  self.childNode(withName: "PauseButton") as? SKSpriteNode
+        
         scoreLabel = self.childNode(withName: "scoreLabel") as? SKLabelNode
         
         currentScore = 0
+        
+        
     }
     
+    func livesReduced() {
+        
+       
+        lives?.first?.removeFromParent()
+        
 
+}
 }
