@@ -82,6 +82,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var lives: [SKSpriteNode]?
     
     var pause:SKSpriteNode?
+    var play:SKSpriteNode?
     var scoreLabel:SKLabelNode?
     var currentScore:Int = 0 {
         didSet {
@@ -146,9 +147,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             else if node?.name == "PauseButton", let scene = self.scene {
                 if scene.isPaused {
                     scene.isPaused = false
+                    play?.isHidden = true
+                    pause?.isHidden = false
                 }
                 else {
                     scene.isPaused = true
+                    play?.isHidden = false
+                    pause?.isHidden = true
+                    
+                }
+            }
+                
+            else if node?.name == "PlayButton", let scene = self.scene {
+                if scene.isPaused {
+                    scene.isPaused = false
+                    pause?.isHidden = false
+                    play?.isHidden = true
+                }
+                else {
+                    scene.isPaused = true
+                    pause?.isHidden = true
+                    play?.isHidden = false
                     //play?.isHidden = false
                     
                 }

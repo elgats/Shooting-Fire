@@ -128,8 +128,9 @@ extension GameScene {
     }
     
     func createHUD() {
-        pause =  self.childNode(withName: "PauseButton") as? SKSpriteNode
-        
+        pause = self.childNode(withName: "PauseButton") as? SKSpriteNode
+        play = self.childNode(withName: "PlayButton") as? SKSpriteNode
+        play?.isHidden = true
         scoreLabel = self.childNode(withName: "scoreLabel") as? SKLabelNode
         
         currentScore = 0
