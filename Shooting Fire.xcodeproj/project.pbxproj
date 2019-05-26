@@ -19,6 +19,8 @@
 		AD79F7312298F06D00E70698 /* Evil_Laugh_Male_6-Himan-1359990674.wav in Resources */ = {isa = PBXBuildFile; fileRef = AD79F7302298F06D00E70698 /* Evil_Laugh_Male_6-Himan-1359990674.wav */; };
 		AD8CDFF4229678BF00EB8559 /* SmokeParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = AD8CDFF3229678BF00EB8559 /* SmokeParticle.sks */; };
 		AD8CDFF62296ED5200EB8559 /* wrong-buzzer.wav in Resources */ = {isa = PBXBuildFile; fileRef = AD8CDFF52296ED5200EB8559 /* wrong-buzzer.wav */; };
+		AD978E82229A34A60030DAC5 /* CreditScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = AD978E81229A34A60030DAC5 /* CreditScene.sks */; };
+		AD978E84229A34C50030DAC5 /* CreditScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD978E83229A34C50030DAC5 /* CreditScene.swift */; };
 		ADACE2252292462500016335 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADACE2242292462500016335 /* AppDelegate.swift */; };
 		ADACE2272292462500016335 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = ADACE2262292462500016335 /* GameScene.sks */; };
 		ADACE2292292462500016335 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = ADACE2282292462500016335 /* Actions.sks */; };
@@ -45,6 +47,8 @@
 		AD79F7302298F06D00E70698 /* Evil_Laugh_Male_6-Himan-1359990674.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Evil_Laugh_Male_6-Himan-1359990674.wav"; sourceTree = "<group>"; };
 		AD8CDFF3229678BF00EB8559 /* SmokeParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SmokeParticle.sks; sourceTree = "<group>"; };
 		AD8CDFF52296ED5200EB8559 /* wrong-buzzer.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "wrong-buzzer.wav"; sourceTree = "<group>"; };
+		AD978E81229A34A60030DAC5 /* CreditScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CreditScene.sks; sourceTree = "<group>"; };
+		AD978E83229A34C50030DAC5 /* CreditScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditScene.swift; sourceTree = "<group>"; };
 		ADACE2212292462500016335 /* Shooting Fire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shooting Fire.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADACE2242292462500016335 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADACE2262292462500016335 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -77,6 +81,7 @@
 				ADACE2262292462500016335 /* GameScene.sks */,
 				AD1A7C8D2298483300DF0B8A /* StartScene.sks */,
 				AD1A7C9922984D8100DF0B8A /* GameOverScene.sks */,
+				AD978E81229A34A60030DAC5 /* CreditScene.sks */,
 			);
 			path = "Game Scenes";
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 				ADACE2282292462500016335 /* Actions.sks */,
 				ADACE22A2292462500016335 /* GameScene.swift */,
 				AD1A7C9C22984ED300DF0B8A /* GameOverScene.swift */,
+				AD978E83229A34C50030DAC5 /* CreditScene.swift */,
 				AD086BD42295824600F50771 /* GameFunction.swift */,
 				AD086BD62295850700F50771 /* GameElements.swift */,
 				ADACE22C2292462500016335 /* GameViewController.swift */,
@@ -205,6 +211,7 @@
 				ADACE24822925D2B00016335 /* flameloop.wav in Resources */,
 				ADACE2302292462500016335 /* Main.storyboard in Resources */,
 				ADACE2272292462500016335 /* GameScene.sks in Resources */,
+				AD978E82229A34A60030DAC5 /* CreditScene.sks in Resources */,
 				AD1A7C8A22981C7600DF0B8A /* Assets.xcassets in Resources */,
 				ADACE2322292462600016335 /* Assets.xcassets in Resources */,
 				AD1A7C8E2298483300DF0B8A /* StartScene.sks in Resources */,
@@ -231,6 +238,7 @@
 				AD1A7C9D22984ED300DF0B8A /* GameOverScene.swift in Sources */,
 				ADACE22B2292462500016335 /* GameScene.swift in Sources */,
 				AD086BD52295824600F50771 /* GameFunction.swift in Sources */,
+				AD978E84229A34C50030DAC5 /* CreditScene.swift in Sources */,
 				ADACE22D2292462500016335 /* GameViewController.swift in Sources */,
 				ADACE2252292462500016335 /* AppDelegate.swift in Sources */,
 			);

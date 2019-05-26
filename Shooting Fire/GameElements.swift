@@ -52,6 +52,27 @@ extension GameScene {
         flame.position = CGPoint(x: 0, y: -50)
     }
     
+//    func apiImage() {
+//     let api = childNode(withName: "api")
+//        //self.addChild(api!)
+//   // api?.isHidden = true
+//    }
+    
+    func calmShape() {
+        calm = SKSpriteNode(imageNamed: "calm")
+        
+        calm?.position = CGPoint(x: size.width * 0.5, y: size.height * 0.25)
+        calm?.physicsBody = SKPhysicsBody(circleOfRadius: calm!.size.height)
+        calm?.physicsBody?.categoryBitMask = calmCategory
+        calm?.physicsBody?.collisionBitMask = 0
+        calm?.physicsBody?.usesPreciseCollisionDetection = true
+        
+        self.addChild(calm!)
+        
+    }
+    
+
+    
     func sound() {
         let loopSound:SKAction = SKAction.repeatForever(fireSound)
         self.run(loopSound)
@@ -82,7 +103,7 @@ extension GameScene {
             shapeSprite.physicsBody?.categoryBitMask = targetCategory
             
             shapeSprite.physicsBody?.collisionBitMask = fireCategory | projectileCategory
-            shapeSprite.physicsBody?.contactTestBitMask = fireCategory | lineCategory | projectileCategory
+            shapeSprite.physicsBody?.contactTestBitMask = fireCategory | lineCategory | projectileCategory | calmCategory
 
             
         case .notTarget:
@@ -95,7 +116,7 @@ extension GameScene {
             shapeSprite.physicsBody?.categoryBitMask = notTargetCategory
            
            shapeSprite.physicsBody?.collisionBitMask = 0
-           shapeSprite.physicsBody?.contactTestBitMask = fireCategory | lineCategory | projectileCategory
+           shapeSprite.physicsBody?.contactTestBitMask = fireCategory | lineCategory | projectileCategory | calmCategory
 
         }
         

@@ -10,9 +10,12 @@ import SpriteKit
 
 class GameOverScene: SKScene {
     
+    let evilSound = SKAction.playSoundFileNamed("Evil_Laugh_Male_6-Himan-1359990674.wav", waitForCompletion: true)
+    
 //    
     override func didMove(to view: SKView) {
         
+        self.run(evilSound)
 //        
 //        }
         

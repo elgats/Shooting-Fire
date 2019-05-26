@@ -13,19 +13,18 @@ extension GameScene {
     
     
 
-    func move (pindah: Bool) {
+    func move (node: SKSpriteNode, pindah: Bool) {
         if pindah {
             let moving = SKAction.moveBy(x: 15, y: 0, duration: 0.1)
             let repeatAction = SKAction.repeatForever(moving)
             
-            if ((fire?.position.x)!) <= 500 {
-                fire?.run(repeatAction, withKey: "moveRight")
+            if node.position.x <= 500 {
+                node.run(repeatAction, withKey: "moveRight")
             }
-                
-            else {
-                fire?.removeAction(forKey: "moveRight")
+            else if node.position.x > 500 {
+                node.removeAction(forKey: "moveRight")
             }
-
+           
         }
             
         else {
@@ -33,16 +32,42 @@ extension GameScene {
             let repeatAction = SKAction.repeatForever(moving)
            // fire?.run(repeatAction)
             
-            if ((fire?.position.x)!) >= 220 {
-                fire?.run(repeatAction, withKey: "moveLeft")
+            if node.position.x >= 220 {
+                node.run(repeatAction, withKey: "moveLeft")
             }
                 
             else {
-                fire?.removeAction(forKey: "moveLeft")
+                node.removeAction(forKey: "moveLeft")
             }
         }
     }
     
+//    func movingCalm (pindah: Bool) {
+//        if pindah {
+//            let moving = SKAction.moveBy(x: 15, y: 0, duration: 0.1)
+//            let repeatAction = SKAction.repeatForever(moving)
+//            
+//            if (calm?.position.x)! <= CGFloat(500) {
+//                calm?.run(repeatAction, withKey: "moveRight")
+//            }
+//            else if ((calm?.position.x)!) > 500 {
+//                calm?.removeAction(forKey: "moveRight")
+//            }
+//        }
+//        
+//        else {
+//            let moving = SKAction.moveBy(x: -15, y: 0, duration: 0.1)
+//            let repeatAction = SKAction.repeatForever(moving)
+//        
+//        if ((calm?.position.x)!) >= 220 {
+//            calm?.run(repeatAction, withKey: "moveLeft")
+//        }
+//            
+//        else {
+//            calm?.removeAction(forKey: "moveLeft")
+//        }
+//        }
+//    }
     func shoot() {
 
         self.run(shotSound)
@@ -113,19 +138,22 @@ extension GameScene {
         emitter?.position = CGPoint(x: 5, y: 35)
         notTargetBody.node?.addChild(emitter!)
 
-        self.run(SKAction.wait(forDuration: 0.1)){
+        self.run(SKAction.wait(forDuration: 0.2)){
             notTargetBody.node?.removeFromParent()
             
         }
     }
     
-    func createHearts() {
-        let heart1:SKSpriteNode = self.childNode(withName: "heart1") as! SKSpriteNode
-        let heart2:SKSpriteNode = self.childNode(withName: "heart2") as! SKSpriteNode
-        let heart3:SKSpriteNode = self.childNode(withName: "heart3") as! SKSpriteNode
-         var lives: [SKSpriteNode] = [heart1, heart2, heart3]
+    func evilWins(targetBody: SKPhysicsBody)  {
+        let scale = SKAction.scale(by: 1.05, duration: 0.5)
+        targetBody.node?.run(scale)
         
+        self.run(SKAction.wait(forDuration: 0.7)){
+            targetBody.node?.removeFromParent()
+            
+        }
     }
+    
     
     func createHUD() {
         pause = self.childNode(withName: "PauseButton") as? SKSpriteNode
@@ -133,16 +161,22 @@ extension GameScene {
         play?.isHidden = true
         scoreLabel = self.childNode(withName: "scoreLabel") as? SKLabelNode
         
-        currentScore = 0
+        //currentScore = 100
         
         
     }
     
-    func livesReduced() {
+    func adjustHealth(by healthAdjustment: Int) {
+        // 1
         
+ //       if health < 1 {
+        health = max(health + healthAdjustment, 0)
+        }
+//        else {
+//        health = max(1,0)
+//        if let health = childNode(withName: scoreLabel) as? SKLabelNode {
+//            health.text = String(format: "Health: %.1f%%", self.shipHealth * 100)
        
-        lives?.first?.removeFromParent()
-        
 
-}
+    
 }

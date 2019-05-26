@@ -10,16 +10,17 @@ import SpriteKit
 
 class StartScene: SKScene {
     
-    var backgroundMusic: SKAudioNode!
+   
     var gameScene:SKScene!
     var startButton: SKSpriteNode?
+    var creditButton: SKSpriteNode?
+    var backgroundNoise = SKAction.playSoundFileNamed("authormusic-drone-electronics-build-up.mp3", waitForCompletion: true)
     
     override func didMove(to view: SKView) {
      
-        if let musicURL = Bundle.main.url(forResource: "authormusic-drone-electronics-build-upc", withExtension: "mp3") {
-                        backgroundMusic = SKAudioNode(url: musicURL)
-                        addChild(backgroundMusic)
-        }
+    startButton = self.childNode(withName: "startButton") as? SKSpriteNode
+            self.run(backgroundNoise)
+    startButton = self.childNode(withName: "creditButton") as? SKSpriteNode
         
     }
     

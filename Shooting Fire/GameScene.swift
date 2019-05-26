@@ -50,16 +50,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
         var tracksArray: [SKSpriteNode]? = [SKSpriteNode]() //() for initilizing tracks
         var fire: SKSpriteNode?
+        var api: SKSpriteNode?
+        var calm: SKSpriteNode?
         var projectile: SKSpriteNode?
         var line: SKSpriteNode?
         var currentTrack = 0
+        var startGameScene:SKScene!
     
     //sounds
         let fireSound = SKAction.playSoundFileNamed("flameloop.wav", waitForCompletion: true)
-    
+         var backgroundNoise = SKAction.playSoundFileNamed("authormusic-drone-electronics-build-up.mp3", waitForCompletion: true)
         let shotSound = SKAction.playSoundFileNamed("flamethrowerwav.wav", waitForCompletion: false)
         let wrongTargetSound = SKAction.playSoundFileNamed("wrong-buzzer.wav", waitForCompletion: true)
-        var backgroundNoise = SKAction.playSoundFileNamed("authormusic-drone-electronics-build-up.mp3", waitForCompletion: true)
+        
+       
     
     
         var moveTrack = false
@@ -70,23 +74,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let fireCategory:UInt32 = 0x1 << 0
     let projectileCategory:UInt32 = 0x1 << 1
-    let targetCategory:UInt32 = 0x1 << 2
-    let notTargetCategory:UInt32 = 0x1 << 3
-    let lineCategory:UInt32 = 0x1 << 4
+    let calmCategory:UInt32 = 0x1 << 2
+    let targetCategory:UInt32 = 0x1 << 3
+    let notTargetCategory:UInt32 = 0x1 << 4
+    let lineCategory:UInt32 = 0x1 << 5
     
     //HUD
- 
-    var heart1:SKSpriteNode?
-    var heart2:SKSpriteNode?
-    var heart3:SKSpriteNode?
-    var lives: [SKSpriteNode]?
-    
+
     var pause:SKSpriteNode?
     var play:SKSpriteNode?
     var scoreLabel:SKLabelNode?
-    var currentScore:Int = 0 {
+//    var currentScore:Int = 0 {
+//        didSet {
+//            self.scoreLabel?.text = String(format: "Health: %.1f%%", health * 100.0)
+//        }
+//    }
+    var health: Int = 100 {
         didSet {
-            self.scoreLabel?.text = "Score: \(self.currentScore)"
+             self.scoreLabel?.text = String("Health: \(health)%")
         }
     }
 
@@ -94,9 +99,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.physicsWorld.contactDelegate = self
         physicsWorld.gravity = .zero
+        self.childNode(withName: "api")?.isHidden = true
         setUpTracks()
         createHUD()
-        createHearts()
         createLine()
         createFire()
         sound()
@@ -134,14 +139,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let location = touch.previousLocation(in: self)
             let node = self.nodes(at: location).first
             
-            if node?.name == "api" {
-                shoot()
+            if node?.name == "calmButton" {
+                //shoot()
+              calmShape()
+              fire?.removeFromParent()
+              childNode(withName: "calmButton")?.isHidden = true
+              childNode(withName: "api")?.isHidden = false
+            }
+            else if node?.name == "api" {
+                createFire()
+                calm?.removeFromParent()
+                childNode(withName: "api")?.isHidden = true
+                childNode(withName: "calmButton")?.isHidden = false
             }
             else if node?.name == "right" {
-                move(pindah: true)
+                move(node: fire!, pindah: true)
+            //    movingCalm(pindah: true)
             }
             else if node?.name == "left" {
-                move(pindah: false)
+                move(node: fire!, pindah: false)
+            //    movingCalm(pindah: false)
             }
                 
             else if node?.name == "PauseButton", let scene = self.scene {
@@ -171,6 +188,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     //play?.isHidden = false
                     
                 }
+            }
+                
+            else if node?.name == "retry" {
+                let transition = SKTransition.fade(withDuration: 1)
+                startGameScene = SKScene(fileNamed: "StartScene")
+                startGameScene.scaleMode = .aspectFit
+                self.view?.presentScene(startGameScene, transition: transition)
             }
             
             else {
@@ -246,7 +270,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         if fireBody.categoryBitMask == fireCategory && otherBody.categoryBitMask == targetCategory {
 
-        currentScore += 1
+  //      currentScore += 1
+            if health != 100 {
+                adjustHealth(by: 1)
+            }
+                
+            else {
+                adjustHealth(by: 0)
+            }
+
 //                
        burn(targetPhysicsBody: otherBody)
            
@@ -255,11 +287,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         else if fireBody.categoryBitMask == fireCategory && otherBody.categoryBitMask == notTargetCategory {
           print("collide with non-target")
-            currentScore -= 1
+     //       currentScore -= 1
+            adjustHealth(by: -1)
             otherBody.node?.removeFromParent()
             self.run(wrongTargetSound)
-          //  livesReduced()
-            lives?.first?.removeFromParent()
             }
         
         var line: SKPhysicsBody
@@ -275,14 +306,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if line.categoryBitMask == lineCategory && others.categoryBitMask == targetCategory {
-            others.node?.removeFromParent()
-            currentScore -= 1
-            //livesReduced()
-            lives?.first?.removeFromParent()
+            
+            evilWins(targetBody: others)
+          //  others.node?.removeFromParent()
+   //         currentScore -= 1
+            adjustHealth(by: -1)
+        
+            
         }
         
         else if line.categoryBitMask == lineCategory && others.categoryBitMask == notTargetCategory {
-         self.currentScore += 1
+  //       self.currentScore += 1
+            if health != 100 {
+                adjustHealth(by: 1)
+            }
+                
+            else {
+                adjustHealth(by: 0)
+            }
+
         congrats(notTargetBody: others)
             
         }
@@ -301,9 +343,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if projectileBody.categoryBitMask == projectileCategory && shapeBody.categoryBitMask == targetCategory {
             
-           currentScore += 1
+ //          currentScore += 1
+            if health != 100 {
+                adjustHealth(by: 1)
+            }
+                
+            else {
+                adjustHealth(by: 0)
+            }
 
-            burn(targetPhysicsBody: otherBody)
+            burn(targetPhysicsBody: shapeBody)
             projectileBody.node?.removeFromParent()
             
             
@@ -312,13 +361,48 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         else if projectileBody.categoryBitMask == projectileCategory && shapeBody.categoryBitMask == notTargetCategory {
             print("collide with non-target")
             
-            currentScore -= 1
+   //         currentScore -= 1
            // self.run(currentScore -= 1), waitForCompletion: true
             shapeBody.node?.removeFromParent()
             projectileBody.node?.removeFromParent()
-          //  livesReduced()
-            lives?.first?.removeFromParent()
+            adjustHealth(by: -1)
             self.run(wrongTargetSound)
+            
+        }
+        
+        var calmBody: SKPhysicsBody
+        var targetOrNotTargetBody: SKPhysicsBody
+        
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+            calmBody = contact.bodyA
+            targetOrNotTargetBody = contact.bodyB
+        }
+        else {
+            calmBody = contact.bodyB
+            targetOrNotTargetBody = contact.bodyA
+        }
+        
+        if calmBody.categoryBitMask == calmCategory && targetOrNotTargetBody.categoryBitMask == targetCategory {
+            
+   //         currentScore -= 1
+            adjustHealth(by: -1)
+            targetOrNotTargetBody.node?.removeFromParent()
+        }
+        
+        
+        else if calmBody.categoryBitMask == calmCategory && targetOrNotTargetBody.categoryBitMask == notTargetCategory {
+            
+            if health != 100 {
+            adjustHealth(by: 1)
+            }
+            
+            else {
+                adjustHealth(by: 0)
+            }
+ //           currentScore += 1
+            congrats(notTargetBody: targetOrNotTargetBody)
+          //  targetOrNotTargetBody.node?.removeFromParent()
+          
             
         }
     }
