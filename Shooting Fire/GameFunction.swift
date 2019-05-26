@@ -184,16 +184,20 @@ extension GameScene {
     }
     
     func adjustHealth(by healthAdjustment: Int) {
-        // 1
-        
- //       if health < 1 {
+
         health = max(health + healthAdjustment, 0)
         }
-//        else {
-//        health = max(1,0)
-//        if let health = childNode(withName: scoreLabel) as? SKLabelNode {
-//            health.text = String(format: "Health: %.1f%%", self.shipHealth * 100)
-       
+
+    func gameOver() {
+        self.run(evilSound)
+        
+         let transition = SKTransition.fade(withDuration: 1)
+        
+        if let gameOverScene = SKScene(fileNamed: "GameOverScene") {
+            gameOverScene.scaleMode = .aspectFit
+            self.view?.presentScene(gameOverScene, transition: transition)
+        }
+    }
 
     
 }

@@ -62,7 +62,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
          var backgroundNoise = SKAction.playSoundFileNamed("authormusic-drone-electronics-build-up.mp3", waitForCompletion: true)
         let shotSound = SKAction.playSoundFileNamed("flamethrowerwav.wav", waitForCompletion: false)
         let wrongTargetSound = SKAction.playSoundFileNamed("wrong-buzzer.wav", waitForCompletion: true)
-        
+        let evilSound = SKAction.playSoundFileNamed("Evil_Laugh_Male_6-Himan-1359990674.wav", waitForCompletion: true)
        
     
     
@@ -125,18 +125,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.run(SKAction.repeatForever(SKAction.sequence([SKAction.run {
             self.spawnShapes()
         }, SKAction.wait(forDuration: 3)])))
+            
+        
+       
+            
         } // call shape, wait a bit, call shape again
-    
-
-    
-    func projectileDidCollideWithShape(projectile: SKSpriteNode, shapeSprite: SKShapeNode) {
-        print("Hit")
-        projectile.removeFromParent()
-        shapeSprite.removeFromParent()
-    }
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+        if health == 0 {
+            gameOver()
+        }
     }
     
     
