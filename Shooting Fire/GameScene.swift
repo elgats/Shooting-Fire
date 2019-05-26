@@ -177,6 +177,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 fire?.position = calm!.position
                 fire?.isHidden = false
                 calm?.isHidden = true
+                
               //  calm?.removeFromParent()
                 childNode(withName: "api")?.isHidden = true
                 childNode(withName: "calmButton")?.isHidden = false
@@ -251,8 +252,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if offset.y < 0 { return }
             //
             // 5 - OK to add now - you've double checked position
-            addChild(projectile)
-            
+                if fire?.isHidden == false {
+                addChild(projectile)
+                }
             // 6 - Get the direction of where to shoot
             let direction = offset.normalized()
             
