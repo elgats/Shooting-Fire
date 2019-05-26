@@ -158,7 +158,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             if node?.name == "calmButton" {
                 
-                calmShape()
+                calm?.position = fire!.position
                 calm?.isHidden = false
                 fire?.isHidden = true
               childNode(withName: "calmButton")?.isHidden = true
@@ -168,7 +168,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             else if node?.name == "api" {
                 
-                createFire()
                 fire?.position = calm!.position
                 fire?.isHidden = false
                 calm?.isHidden = true
@@ -423,7 +422,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             if calm?.isHidden == false {
             adjustHealth(by: -1)
-            targetOrNotTargetBody.node?.removeFromParent()
+            evilWins(targetBody: targetOrNotTargetBody)
         }
         }
         

@@ -101,7 +101,7 @@ extension GameScene {
     
     func createShapes (type: shapes, forTrack track: Int) -> SKShapeNode? {
         let shapeSprite = SKShapeNode()
-       // shapeSprite.name  = "SHAPES"
+
         switch type {
         case .target:
             shapeSprite.name  = "TARGET"
@@ -111,7 +111,6 @@ extension GameScene {
             shapeSprite.glowWidth = 2
             shapeSprite.strokeColor = #colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1)
             shapeSprite.physicsBody = SKPhysicsBody(edgeLoopFrom: shapeSprite.path!)
-          //  shapeSprite.physicsBody?.isDynamic = true
             shapeSprite.physicsBody?.categoryBitMask = targetCategory
             
             shapeSprite.physicsBody?.collisionBitMask = fireCategory | projectileCategory
@@ -124,7 +123,7 @@ extension GameScene {
             shapeSprite.fillColor = UIColor(red: 31/255, green: 204/255, blue: 0/255, alpha: 1)
            shapeSprite.fillTexture = SKTexture.init(image: UIImage(named: "Good")!)
             shapeSprite.physicsBody = SKPhysicsBody(edgeLoopFrom: shapeSprite.path!)
-          //  shapeSprite.physicsBody?.isDynamic = true
+   
             shapeSprite.physicsBody?.categoryBitMask = notTargetCategory
            
            shapeSprite.physicsBody?.collisionBitMask = 0
@@ -133,9 +132,7 @@ extension GameScene {
         }
         
         guard let shapePosition = tracksArray?[track].position else {return nil}
-        //
-        //        let pindah = directionArray[track]
-        //
+
         shapeSprite.position.x = shapePosition.x
         shapeSprite.position.y = self.size.height + 130
         
