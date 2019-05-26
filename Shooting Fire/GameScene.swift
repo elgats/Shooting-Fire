@@ -73,9 +73,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var velocityArray = [Int]()
     
     
-    let fireCategory:UInt32 = 0x1 << 0
+    var fireCategory:UInt32 = 0x1 << 0
     let projectileCategory:UInt32 = 0x1 << 1
-    let calmCategory:UInt32 = 0x1 << 2
+    var calmCategory:UInt32 = 0x1 << 2
     let targetCategory:UInt32 = 0x1 << 3
     let notTargetCategory:UInt32 = 0x1 << 4
     let lineCategory:UInt32 = 0x1 << 5
@@ -170,6 +170,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
               childNode(withName: "calmButton")?.isHidden = true
               childNode(withName: "api")?.isHidden = false
               moveCalmButton(show: true)
+//              calmCategory = 0x1 << 2
+//              fireCategory = targetCategory
+//              fireCategory = notTargetCategory
+                
             }
             else if node?.name == "api" {
                 
@@ -177,7 +181,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 fire?.position = calm!.position
                 fire?.isHidden = false
                 calm?.isHidden = true
-                
+//                calmCategory = targetCategory
+//                calmCategory = notTargetCategory
+//                fireCategory = 0x1 << 0
               //  calm?.removeFromParent()
                 childNode(withName: "api")?.isHidden = true
                 childNode(withName: "calmButton")?.isHidden = false
@@ -312,7 +318,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         if fireBody.categoryBitMask == fireCategory && otherBody.categoryBitMask == targetCategory {
-
+            
+            if fire?.isHidden == false {
   //      currentScore += 1
             if health != 100 {
                 adjustHealth(by: 1)
@@ -321,20 +328,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             else {
                 adjustHealth(by: 0)
             }
-
-//                
+            }
+//
+            if fire?.isHidden == false {
        burn(targetPhysicsBody: otherBody)
-           
+            }
         
         }
 
         else if fireBody.categoryBitMask == fireCategory && otherBody.categoryBitMask == notTargetCategory {
+            
+            if fire?.isHidden == false {
           print("collide with non-target")
-     //       currentScore -= 1
+    
             adjustHealth(by: -1)
             otherBody.node?.removeFromParent()
             self.run(wrongTargetSound)
             }
+        }
         
         var line: SKPhysicsBody
         var others: SKPhysicsBody
@@ -427,14 +438,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if calmBody.categoryBitMask == calmCategory && targetOrNotTargetBody.categoryBitMask == targetCategory {
             
-   //         currentScore -= 1
+            if calm?.isHidden == false {
             adjustHealth(by: -1)
             targetOrNotTargetBody.node?.removeFromParent()
+        }
         }
         
         
         else if calmBody.categoryBitMask == calmCategory && targetOrNotTargetBody.categoryBitMask == notTargetCategory {
             
+            if calm?.isHidden == false {
             if health != 100 {
             adjustHealth(by: 1)
             }
@@ -445,7 +458,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
  //           currentScore += 1
             congrats(notTargetBody: targetOrNotTargetBody)
           //  targetOrNotTargetBody.node?.removeFromParent()
-          
+            }
             
         }
     }
