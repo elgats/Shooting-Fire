@@ -11,7 +11,13 @@ import GameplayKit
 
 extension GameScene {
     
-    
+    func launchGameTimer () {
+        let timeAction = SKAction.repeatForever(SKAction.sequence([SKAction.run({
+            self.currentTime += 1
+        }),SKAction.wait(forDuration: 1)]))
+        
+        timeLabel?.run(timeAction)
+    }
 
     func move (node: SKSpriteNode, pindah: Bool) {
         if pindah {
@@ -41,33 +47,6 @@ extension GameScene {
             }
         }
     }
-    
-//    func movingCalm (pindah: Bool) {
-//        if pindah {
-//            let moving = SKAction.moveBy(x: 15, y: 0, duration: 0.1)
-//            let repeatAction = SKAction.repeatForever(moving)
-//            
-//            if (calm?.position.x)! <= CGFloat(500) {
-//                calm?.run(repeatAction, withKey: "moveRight")
-//            }
-//            else if ((calm?.position.x)!) > 500 {
-//                calm?.removeAction(forKey: "moveRight")
-//            }
-//        }
-//        
-//        else {
-//            let moving = SKAction.moveBy(x: -15, y: 0, duration: 0.1)
-//            let repeatAction = SKAction.repeatForever(moving)
-//        
-//        if ((calm?.position.x)!) >= 220 {
-//            calm?.run(repeatAction, withKey: "moveLeft")
-//        }
-//            
-//        else {
-//            calm?.removeAction(forKey: "moveLeft")
-//        }
-//        }
-//    }
     
     func moveCalmButton(show: Bool) {
         if show {
@@ -171,17 +150,6 @@ extension GameScene {
         }
     }
     
-    
-    func createHUD() {
-        pause = self.childNode(withName: "PauseButton") as? SKSpriteNode
-        play = self.childNode(withName: "PlayButton") as? SKSpriteNode
-        play?.isHidden = true
-        scoreLabel = self.childNode(withName: "scoreLabel") as? SKLabelNode
-        
-        //currentScore = 100
-        
-        
-    }
     
     func adjustHealth(by healthAdjustment: Int) {
 

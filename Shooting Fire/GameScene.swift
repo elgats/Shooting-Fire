@@ -84,6 +84,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     var pause:SKSpriteNode?
     var play:SKSpriteNode?
+    var timeLabel:SKLabelNode?
+    
+    var currentTime:TimeInterval = 0 {
+        didSet {
+            self.timeLabel?.text = "\(Int(self.currentTime))s"
+        }
+    }
+    
     var scoreLabel:SKLabelNode?
 //    var currentScore:Int = 0 {
 //        didSet {
@@ -92,7 +100,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //    }
     var health: Int = 100 {
         didSet {
-             self.scoreLabel?.text = String("Health: \(health)%")
+             self.scoreLabel?.text = String("\(health)%")
         }
     }
 
@@ -106,6 +114,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
        // self.childNode(withName: "calm")?.isHidden = true
         setUpTracks()
         createHUD()
+        launchGameTimer()
         createLine()
         createFire()
         calmShape()

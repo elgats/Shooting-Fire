@@ -17,6 +17,14 @@ enum shapes:Int { //Int so that we can randomize it
 extension GameScene {
 
     
+    func createHUD() {
+        pause = self.childNode(withName: "PauseButton") as? SKSpriteNode
+        play = self.childNode(withName: "PlayButton") as? SKSpriteNode
+        play?.isHidden = true
+        scoreLabel = self.childNode(withName: "scoreLabel") as? SKLabelNode
+        timeLabel = self.childNode(withName: "timeLabel") as? SKLabelNode
+    }
+    
     func setUpTracks() {
         
         for i in 0 ... 3 {
