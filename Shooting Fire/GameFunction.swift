@@ -68,6 +68,23 @@ extension GameScene {
 //        }
 //        }
 //    }
+    
+    func moveCalmButton(show: Bool) {
+        if show {
+        self.childNode(withName: "leftCalm")?.isHidden = false
+        self.childNode(withName: "rightCalm")?.isHidden = false
+        self.childNode(withName: "left")?.isHidden = true
+        self.childNode(withName: "right")?.isHidden = true
+        }
+        
+        else {
+        self.childNode(withName: "leftCalm")?.isHidden = true
+        self.childNode(withName: "rightCalm")?.isHidden = true
+        self.childNode(withName: "left")?.isHidden = false
+        self.childNode(withName: "right")?.isHidden = false
+        }
+    }
+    
     func shoot() {
 
         self.run(shotSound)

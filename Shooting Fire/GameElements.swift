@@ -28,7 +28,8 @@ extension GameScene {
     }
     
     func createFire() {
-        fire = SKSpriteNode(imageNamed: "Fire")
+     //   fire = SKSpriteNode(imageNamed: "Fire")
+        fire = childNode(withName: "Fire") as? SKSpriteNode
         fire?.physicsBody = SKPhysicsBody(circleOfRadius: fire!.size.height)
         fire?.physicsBody?.linearDamping = 0
         fire?.physicsBody?.isDynamic = true
@@ -38,17 +39,17 @@ extension GameScene {
         
         //   fire?.physicsBody?.contactTestBitMask = shapeCategory
         
-        
-        fire?.position = CGPoint(x: size.width * 0.5, y: size.height * 0.25)
+    //    fire?.position = calm!.position
+       fire?.position = CGPoint(x: size.width * 0.5, y: size.height * 0.25)
         
         animateFire()
-        self.addChild(fire!)
+       // self.addChild(fire!)
     }
     
     func animateFire() {
         let flame = SKEmitterNode(fileNamed: "FireParticle")!
         
-        fire!.addChild(flame)
+        fire?.addChild(flame)
         flame.position = CGPoint(x: 0, y: -50)
     }
     
@@ -59,15 +60,18 @@ extension GameScene {
 //    }
     
     func calmShape() {
-        calm = SKSpriteNode(imageNamed: "calm")
-        
-        calm?.position = CGPoint(x: size.width * 0.5, y: size.height * 0.25)
+     //   calm = SKSpriteNode(imageNamed: "calm")
+        calm = childNode(withName: "calm") as? SKSpriteNode
+        calm?.physicsBody?.linearDamping = 0
+        calm?.physicsBody?.isDynamic = true
+        calm?.position = fire!.position
+       // calm?.position = CGPoint(x: size.width * 0.5, y: size.height * 0.25)
         calm?.physicsBody = SKPhysicsBody(circleOfRadius: calm!.size.height)
         calm?.physicsBody?.categoryBitMask = calmCategory
         calm?.physicsBody?.collisionBitMask = 0
         calm?.physicsBody?.usesPreciseCollisionDetection = true
         
-        self.addChild(calm!)
+       // self.addChild(calm!)
         
     }
     

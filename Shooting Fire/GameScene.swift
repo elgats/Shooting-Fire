@@ -72,6 +72,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //var directionArray = [Bool]()
         var velocityArray = [Int]()
     
+    
     let fireCategory:UInt32 = 0x1 << 0
     let projectileCategory:UInt32 = 0x1 << 1
     let calmCategory:UInt32 = 0x1 << 2
@@ -100,11 +101,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.contactDelegate = self
         physicsWorld.gravity = .zero
         self.childNode(withName: "api")?.isHidden = true
+        self.childNode(withName: "leftCalm")?.isHidden = true
+        self.childNode(withName: "rightCalm")?.isHidden = true
+       // self.childNode(withName: "calm")?.isHidden = true
         setUpTracks()
         createHUD()
         createLine()
         createFire()
+        calmShape()
         sound()
+            
         
 
         
@@ -141,24 +147,42 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             if node?.name == "calmButton" {
                 //shoot()
-              calmShape()
-              fire?.removeFromParent()
+                calmShape()
+                calm?.isHidden = false
+                fire?.isHidden = true
+             // fire?.removeFromParent()
               childNode(withName: "calmButton")?.isHidden = true
               childNode(withName: "api")?.isHidden = false
+              moveCalmButton(show: true)
             }
             else if node?.name == "api" {
+                
                 createFire()
-                calm?.removeFromParent()
+                fire?.position = calm!.position
+                fire?.isHidden = false
+                calm?.isHidden = true
+              //  calm?.removeFromParent()
                 childNode(withName: "api")?.isHidden = true
                 childNode(withName: "calmButton")?.isHidden = false
+                moveCalmButton(show: false)
             }
-            else if node?.name == "right" {
+            else if node?.name == "right" || node?.name == "rightimg" {
                 move(node: fire!, pindah: true)
+                self.childNode(withName: "calm")?.isHidden = true
             //    movingCalm(pindah: true)
             }
-            else if node?.name == "left" {
+            else if node?.name == "left" || node?.name == "leftimg" {
                 move(node: fire!, pindah: false)
+                self.childNode(withName: "calm")?.isHidden = true
             //    movingCalm(pindah: false)
+            }
+                
+            else if node?.name == "rightCalm" {
+                move(node: calm!, pindah: true)
+            }
+                
+            else if node?.name == "leftCalm" {
+                move(node: calm!, pindah: false)
             }
                 
             else if node?.name == "PauseButton", let scene = self.scene {
@@ -248,6 +272,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if !moveTrack {
             
             fire?.removeAllActions()
+            calm?.removeAllActions()
         }
     }
     
