@@ -11,7 +11,8 @@ import SpriteKit
 class GameOverScene: SKScene {
     
     var gameScene:SKScene!
-    var playAgainButton: SKSpriteNode?
+    var playAgainButton:SKSpriteNode?
+    var result:SKLabelNode?
     
     let evilSound = SKAction.playSoundFileNamed("Evil_Laugh_Male_6-Himan-1359990674.wav", waitForCompletion: true)
     
@@ -19,7 +20,10 @@ class GameOverScene: SKScene {
     override func didMove(to view: SKView) {
         
         self.run(evilSound)
-
+        
+        result = childNode(withName: "result") as? SKLabelNode
+        result?.text = "\(GameHandler.sharedInstance.timeResult)s"
+        
         playAgainButton = self.childNode(withName: "playAgain") as? SKSpriteNode
         
     }

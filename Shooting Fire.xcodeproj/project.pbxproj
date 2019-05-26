@@ -32,6 +32,7 @@
 		ADACE24822925D2B00016335 /* flameloop.wav in Resources */ = {isa = PBXBuildFile; fileRef = ADACE24722925D2B00016335 /* flameloop.wav */; };
 		ADACE24A229270FF00016335 /* FireParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = ADACE249229270FF00016335 /* FireParticle.sks */; };
 		ADACE24C22929D1900016335 /* flamethrowerwav.wav in Resources */ = {isa = PBXBuildFile; fileRef = ADACE24B22929D1900016335 /* flamethrowerwav.wav */; };
+		ADDBCFB5229AC9FA00B56C94 /* GameHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDBCFB4229AC9FA00B56C94 /* GameHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		ADACE24722925D2B00016335 /* flameloop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = flameloop.wav; sourceTree = "<group>"; };
 		ADACE249229270FF00016335 /* FireParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireParticle.sks; sourceTree = "<group>"; };
 		ADACE24B22929D1900016335 /* flamethrowerwav.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = flamethrowerwav.wav; sourceTree = "<group>"; };
+		ADDBCFB4229AC9FA00B56C94 /* GameHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				AD978E83229A34C50030DAC5 /* CreditScene.swift */,
 				AD086BD42295824600F50771 /* GameFunction.swift */,
 				AD086BD62295850700F50771 /* GameElements.swift */,
+				ADDBCFB4229AC9FA00B56C94 /* GameHandler.swift */,
 				ADACE22C2292462500016335 /* GameViewController.swift */,
 				ADACE22E2292462500016335 /* Main.storyboard */,
 				ADACE24022924FAA00016335 /* Sounds */,
@@ -238,6 +241,7 @@
 				AD1A7C9D22984ED300DF0B8A /* GameOverScene.swift in Sources */,
 				ADACE22B2292462500016335 /* GameScene.swift in Sources */,
 				AD086BD52295824600F50771 /* GameFunction.swift in Sources */,
+				ADDBCFB5229AC9FA00B56C94 /* GameHandler.swift in Sources */,
 				AD978E84229A34C50030DAC5 /* CreditScene.swift in Sources */,
 				ADACE22D2292462500016335 /* GameViewController.swift in Sources */,
 				ADACE2252292462500016335 /* AppDelegate.swift in Sources */,

@@ -89,6 +89,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var currentTime:TimeInterval = 0 {
         didSet {
             self.timeLabel?.text = "\(Int(self.currentTime))s"
+            GameHandler.sharedInstance.timeResult = Int(currentTime)
         }
     }
     
@@ -142,6 +143,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+        if health <= 20 {
+            scoreLabel?.fontColor = UIColor.red
+        }
+        else {
+            scoreLabel?.fontColor = UIColor.white
+        }
+        
         if health == 0 {
             gameOver()
         }
