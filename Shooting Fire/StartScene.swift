@@ -19,8 +19,8 @@ class StartScene: SKScene {
     override func didMove(to view: SKView) {
      
     startButton = self.childNode(withName: "startButton") as? SKSpriteNode
-            self.run(backgroundNoise)
-    startButton = self.childNode(withName: "creditButton") as? SKSpriteNode
+    self.run(backgroundNoise)
+    creditButton = self.childNode(withName: "creditButton") as? SKSpriteNode
         
     }
     
@@ -33,6 +33,14 @@ class StartScene: SKScene {
                 print("tap")
                 let transition = SKTransition.fade(withDuration: 1)
                 gameScene = SKScene(fileNamed: "GameScene")
+                gameScene.scaleMode = .aspectFit
+                self.view?.presentScene(gameScene, transition: transition)
+                
+            }
+            
+            else if node?.name == "creditButton" {
+                let transition = SKTransition.fade(withDuration: 1)
+                gameScene = SKScene(fileNamed: "CreditScene")
                 gameScene.scaleMode = .aspectFit
                 self.view?.presentScene(gameScene, transition: transition)
                 
